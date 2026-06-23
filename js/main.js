@@ -2,6 +2,7 @@
   "use strict";
 
   var d = SITE_DATA;
+  var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function el(tag, className, html) {
     var node = document.createElement(tag);
@@ -15,33 +16,57 @@
   document.getElementById("heroRole").textContent = d.hero.role;
   document.getElementById("heroTagline").textContent = d.hero.tagline;
   document.getElementById("heroPhotoLink").href = d.contact.photoPortfolio;
+  var heroVolcanoImg = document.getElementById("heroVolcanoImg");
+  heroVolcanoImg.src = d.hero.volcanoImage;
+  heroVolcanoImg.alt = "Coulée de lave volcanique à La Réunion, en arrière-plan atténué";
 
-  /* ---------------- About ---------------- */
+  /* ---------------- About (éditorial) ---------------- */
+  document.getElementById("aboutKicker").textContent = d.about.kicker;
+  document.getElementById("aboutLead").textContent = d.about.lead;
   var aboutText = document.getElementById("aboutText");
   d.about.paragraphs.forEach(function (p) {
-    var para = el("p", "reveal");
+    var para = el("p");
     para.textContent = p;
     aboutText.appendChild(para);
   });
 
-  /* ---------------- Expertise ---------------- */
-  var expertiseGrid = document.getElementById("expertiseGrid");
-  d.expertise.forEach(function (item) {
-    var card = el("article", "card reveal");
+  /* ---------------- Territoires ---------------- */
+  var territoryList = document.getElementById("territoryList");
+  d.territories.forEach(function (t) {
+    var article = el("article", "territory reveal");
+    article.id = "territoire-" + t.id;
+
+    var inner = el("div", "territory-inner");
+
+    var number = el("span", "territory-number");
+    number.setAttribute("aria-hidden", "true");
+    number.textContent = t.number;
+
+    var body = el("div", "territory-body");
     var h3 = el("h3");
-    h3.textContent = item.title;
+    h3.textContent = t.title;
     var p = el("p");
-    p.textContent = item.text;
-    var tagRow = el("div", "tag-row");
-    item.tags.forEach(function (tag) {
-      var span = el("span", "tag");
-      span.textContent = tag;
-      tagRow.appendChild(span);
-    });
-    card.appendChild(h3);
-    card.appendChild(p);
-    card.appendChild(tagRow);
-    expertiseGrid.appendChild(card);
+    p.textContent = t.text;
+    var keywords = el("p", "territory-keywords");
+    keywords.textContent = t.keywords.join(" · ");
+
+    body.appendChild(h3);
+    body.appendChild(p);
+    body.appendChild(keywords);
+
+    inner.appendChild(number);
+    inner.appendChild(body);
+    article.appendChild(inner);
+    territoryList.appendChild(article);
+  });
+
+  /* ---------------- Experience sticky summary ---------------- */
+  document.getElementById("experiencePeriod").textContent = d.experienceSummary.period;
+  var experienceHighlights = document.getElementById("experienceHighlights");
+  d.experienceSummary.highlights.forEach(function (h) {
+    var li = el("li");
+    li.textContent = h;
+    experienceHighlights.appendChild(li);
   });
 
   /* ---------------- Experience timeline ---------------- */
@@ -82,65 +107,77 @@
     timeline.appendChild(li);
   });
 
+  /* ---------------- IA générative : étapes ---------------- */
+  var aiSteps = document.getElementById("aiSteps");
+  var aiStepEls = [];
+  d.aiSteps.forEach(function (step) {
+    var item = el("div", "ai-step");
+
+    var number = el("span", "ai-step-number");
+    number.textContent = step.step;
+
+    var h3 = el("h3");
+    h3.textContent = step.title;
+
+    var p = el("p");
+    p.textContent = step.text;
+
+    var example = el("p", "ai-step-example");
+    example.textContent = "Exemple : " + step.example;
+
+    var keywords = el("p", "ai-step-keywords");
+    keywords.textContent = step.keywords.join(" · ");
+
+    item.appendChild(number);
+    item.appendChild(h3);
+    item.appendChild(p);
+    item.appendChild(example);
+    item.appendChild(keywords);
+    aiSteps.appendChild(item);
+    aiStepEls.push(item);
+  });
+
   /* ---------------- Engagements associatifs ---------------- */
   document.getElementById("engagementsIntro").textContent = d.engagements.intro;
   var engagementsGrid = document.getElementById("engagementsGrid");
   d.engagements.items.forEach(function (item) {
-    var card = el("article", "card reveal");
+    var card = el("article", "engagement-card reveal");
+
+    var bigWord = el("span", "engagement-bigword");
+    bigWord.setAttribute("aria-hidden", "true");
+    bigWord.textContent = item.bigWord;
+
+    var content = el("div", "engagement-content");
     var h3 = el("h3");
     h3.textContent = item.org;
     var role = el("p", "card-role");
     role.textContent = item.role;
     var p = el("p");
     p.textContent = item.text;
-    var tagRow = el("div", "tag-row");
-    item.tags.forEach(function (tag) {
-      var span = el("span", "tag");
-      span.textContent = tag;
-      tagRow.appendChild(span);
-    });
-    card.appendChild(h3);
-    card.appendChild(role);
-    card.appendChild(p);
-    card.appendChild(tagRow);
+    var tags = el("p", "engagement-tags");
+    tags.textContent = item.tags.join(" · ");
+
+    content.appendChild(h3);
+    content.appendChild(role);
+    content.appendChild(p);
+    content.appendChild(tags);
+
+    card.appendChild(bigWord);
+    card.appendChild(content);
     engagementsGrid.appendChild(card);
   });
 
-  /* ---------------- AI usage ---------------- */
-  var aiGrid = document.getElementById("aiGrid");
-  d.aiUsage.forEach(function (item) {
-    var card = el("article", "ai-item reveal");
-    var h3 = el("h3");
-    h3.textContent = item.title;
-    var p = el("p");
-    p.textContent = item.text;
-    card.appendChild(h3);
-    card.appendChild(p);
-    aiGrid.appendChild(card);
-  });
-
-  /* ---------------- Skills ---------------- */
-  var skillsGrid = document.getElementById("skillsGrid");
+  /* ---------------- Compétences & outils (compact) ---------------- */
+  var skillsCompact = document.getElementById("skillsCompact");
   d.skills.categories.forEach(function (cat) {
-    var card = el("div", "skill-card reveal");
-    var h3 = el("h3");
-    h3.textContent = cat.name;
-    var row = el("div", "badge-row");
-    cat.items.forEach(function (item) {
-      var badge = el("span", "badge");
-      badge.textContent = item;
-      row.appendChild(badge);
-    });
-    card.appendChild(h3);
-    card.appendChild(row);
-    skillsGrid.appendChild(card);
-  });
-
-  var toolsRow = document.getElementById("toolsRow");
-  d.tools.forEach(function (tool) {
-    var badge = el("span", "badge reveal");
-    badge.textContent = tool;
-    toolsRow.appendChild(badge);
+    var row = el("div", "skills-row");
+    var label = el("span", "skills-row-label");
+    label.textContent = cat.name;
+    var items = el("span", "skills-row-items");
+    items.textContent = cat.items.join(" · ");
+    row.appendChild(label);
+    row.appendChild(items);
+    skillsCompact.appendChild(row);
   });
 
   /* ---------------- Formations ---------------- */
@@ -248,7 +285,7 @@
 
   /* ---------------- Active nav link on scroll ---------------- */
   var navLinks = Array.prototype.slice.call(document.querySelectorAll("[data-nav]"));
-  var sections = navLinks
+  var navSections = navLinks
     .map(function (link) {
       return document.querySelector(link.getAttribute("href"));
     })
@@ -268,7 +305,7 @@
     { rootMargin: "-45% 0px -45% 0px" }
   );
 
-  sections.forEach(function (section) {
+  navSections.forEach(function (section) {
     sectionObserver.observe(section);
   });
 
@@ -288,4 +325,73 @@
   document.querySelectorAll(".reveal").forEach(function (node) {
     revealObserver.observe(node);
   });
+
+  /* ---------------- Parallax très lent sur la photo volcan ---------------- */
+  if (!prefersReducedMotion) {
+    var heroSection = document.getElementById("accueil");
+    var ticking = false;
+
+    function updateParallax() {
+      ticking = false;
+      var rect = heroSection.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+      var offset = rect.top * -0.08;
+      heroVolcanoImg.style.transform = "translateY(" + offset + "px)";
+    }
+
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(updateParallax);
+        }
+      },
+      { passive: true }
+    );
+    updateParallax();
+  }
+
+  /* ---------------- Progression de la chaîne IA au scroll ---------------- */
+  (function aiStepsProgress() {
+    var wrapper = document.getElementById("aiSteps");
+    var progress = document.getElementById("aiStepsProgress");
+    if (!wrapper || !progress || aiStepEls.length === 0) return;
+
+    var ticking = false;
+
+    function update() {
+      ticking = false;
+      var rect = wrapper.getBoundingClientRect();
+      var viewportH = window.innerHeight;
+      // Progression : 0 quand le haut du bloc atteint le bas du viewport,
+      // 1 quand le bas du bloc atteint ~40% de la hauteur du viewport.
+      var start = viewportH * 0.92;
+      var end = viewportH * 0.4;
+      var total = rect.top - end;
+      var range = start - end;
+      var pct = 1 - total / range;
+      pct = Math.max(0, Math.min(1, pct));
+
+      wrapper.style.setProperty("--ai-progress", pct * 100 + "%");
+
+      var activeCount = Math.round(pct * aiStepEls.length);
+      aiStepEls.forEach(function (stepEl, index) {
+        stepEl.classList.toggle("is-active", index < activeCount || pct > 0.92);
+      });
+    }
+
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      },
+      { passive: true }
+    );
+    window.addEventListener("resize", update, { passive: true });
+    update();
+  })();
 })();

@@ -26,48 +26,58 @@ const SITE_DATA = {
   hero: {
     name: "Patrice FONTAINE",
     role: "Directeur adjoint · Directeur pédagogique · Ingénierie de formation & IA générative",
-    tagline:
-      "Je structure des projets, j'accompagne des équipes et je mets l'intelligence artificielle générative au service de résultats concrets.",
+    tagline: "À la croisée de la formation, du numérique, de l'IA générative et du pilotage de projets.",
+    // Photo signature : coulée de lave (énergie, ancrage local, force tranquille).
+    volcanoImage: "assets/images/volcan-02.jpg",
   },
 
   about: {
+    kicker: "Un profil hybride",
+    lead: "Je structure des projets, j'accompagne des équipes et je transforme les idées en actions concrètes.",
     paragraphs: [
       "Depuis 2018, je pilote au sein d'Emergence OI des missions qui mêlent direction opérationnelle, ingénierie de formation et coordination de projets — du suivi quotidien des équipes jusqu'aux dossiers stratégiques déposés auprès des financeurs.",
-      "Mon profil s'est construit par étapes : développement web, puis gestion de chantier dans le BTP, avant de converger vers la direction pédagogique et la gestion de projet. Cette polyvalence me permet de passer aisément du cadrage budgétaire à la conception pédagogique, ou du suivi Qualiopi à l'automatisation d'une tâche avec l'IA générative.",
-      "Au quotidien, j'intègre l'intelligence artificielle générative comme un outil de travail à part entière : rédaction, synthèse, structuration de dossiers, aide à la décision. Pas un effet de mode, une pratique concrète qui fait gagner du temps et de la rigueur à mes équipes.",
+      "Mon profil s'est construit par étapes : développement web, puis gestion de chantier dans le BTP, avant de converger vers la direction pédagogique et la gestion de projet. Au quotidien, j'intègre l'IA générative comme un outil de travail à part entière — pas un effet de mode, une pratique concrète qui fait gagner du temps et de la rigueur à mes équipes.",
     ],
   },
 
-  expertise: [
+  // Cinq grands territoires d'action — remplacent l'ancienne grille de
+  // petites cartes de compétences. Chaque bloc reste sobre : un titre, une
+  // phrase, 3 mots-clés maximum.
+  territories: [
     {
-      title: "Direction & coordination opérationnelle",
-      text: "Pilotage d'équipes, de plannings et d'un portefeuille de projets, avec une attention constante aux délais et aux priorités.",
-      tags: ["Management", "Planning", "Priorisation"],
+      id: "piloter",
+      number: "01",
+      title: "Piloter",
+      text: "Je coordonne les équipes, les plannings et un portefeuille de projets, en gardant le cap sur les délais, les budgets et les priorités.",
+      keywords: ["Coordination", "Budgets", "Priorités"],
     },
     {
-      title: "Ingénierie de formation",
-      text: "Conception de parcours pédagogiques, définition d'objectifs, création de supports et d'outils d'évaluation.",
-      tags: ["Parcours", "Évaluation", "Supports"],
+      id: "former",
+      number: "02",
+      title: "Former",
+      text: "Je conçois des parcours pédagogiques, j'outille les équipes et je pilote la démarche Qualiopi au quotidien.",
+      keywords: ["Ingénierie pédagogique", "Qualiopi", "Certifications"],
     },
     {
-      title: "Appels à projets & dossiers stratégiques",
-      text: "Réponses aux appels à projets, montage de dossiers et suivi des justificatifs auprès des financeurs.",
-      tags: ["Montage de dossier", "Financeurs", "Stratégie"],
+      id: "structurer",
+      number: "03",
+      title: "Structurer",
+      text: "Je monte des dossiers, je réponds aux appels à projets et je formalise les méthodes qui font gagner du temps à l'équipe.",
+      keywords: ["Appels à projets", "Dossiers", "Méthodes"],
     },
     {
-      title: "IA générative & automatisation",
-      text: "Usage avancé des outils d'IA générative pour la rédaction, la synthèse et l'automatisation de tâches récurrentes.",
-      tags: ["Prompts", "Automatisation", "Aide à la décision"],
+      id: "augmenter",
+      number: "04",
+      title: "Augmenter avec l'IA",
+      text: "J'intègre l'IA générative à mon travail quotidien : rédaction, synthèse, automatisation, aide à la décision.",
+      keywords: ["IA générative", "Automatisation", "Décision"],
     },
     {
-      title: "Inclusion numérique",
-      text: "Accompagnement de publics vers l'autonomie numérique, organisation de certifications Pix et TOSA.",
-      tags: ["Médiation numérique", "Pix", "TOSA"],
-    },
-    {
-      title: "Suivi administratif, financier & Qualiopi",
-      text: "Suivi des budgets, bilans d'activité, livrables et conformité au référentiel Qualiopi.",
-      tags: ["Budgets", "Bilans", "Qualiopi"],
+      id: "engager",
+      number: "05",
+      title: "S'engager",
+      text: "Je m'implique dans des structures associatives tournées vers l'Europe, l'océan Indien et la prévention routière.",
+      keywords: ["Gouvernance", "Prévention", "Territoire"],
     },
   ],
 
@@ -76,13 +86,12 @@ const SITE_DATA = {
       role: "Directeur adjoint / Directeur pédagogique",
       org: "Emergence OI",
       period: "2018 — aujourd'hui",
+      tag: "Direction & IA générative",
       current: true,
       points: [
         "Coordination des équipes, des plannings et d'un portefeuille de projets variés.",
         "Pilotage des délais, budgets, livrables, bilans d'activité et justificatifs financeurs.",
-        "Optimisation des méthodes et outils internes.",
-        "Réponses aux appels à projets et dossiers stratégiques.",
-        "Ingénierie de formation et suivi de la démarche Qualiopi.",
+        "Réponses aux appels à projets, ingénierie de formation et suivi Qualiopi.",
         "Intégration de l'IA générative dans les pratiques quotidiennes de l'équipe.",
       ],
     },
@@ -90,6 +99,7 @@ const SITE_DATA = {
       role: "Développeur intégrateur web",
       org: "Emergence OI",
       period: "2018",
+      tag: "Développement web",
       current: false,
       points: [
         "Réalisation de sites web vitrines pour différentes structures.",
@@ -100,17 +110,18 @@ const SITE_DATA = {
       role: "Responsable de chantier",
       org: "SARL BTPOI",
       period: "2014 — 2017",
+      tag: "BTP",
       current: false,
       points: [
         "Élaboration de devis, facturation et métrés.",
-        "Réponses aux appels d'offres et visites de chantier.",
-        "Implantation, suivi et réception de chantiers.",
+        "Réponses aux appels d'offres, visites, implantation, suivi et réception de chantiers.",
       ],
     },
     {
       role: "Photographie & création visuelle",
       org: "Micro-entreprise — activité complémentaire",
       period: "En continu",
+      tag: "Création visuelle",
       current: false,
       points: [
         "Photographie professionnelle et retouche.",
@@ -123,81 +134,75 @@ const SITE_DATA = {
     },
   ],
 
+  // Sticky panel affiché à gauche de la section Expérience sur desktop.
+  experienceSummary: {
+    period: "2018 — aujourd'hui",
+    highlights: ["Direction pédagogique", "Coordination", "IA générative"],
+  },
+
+  // Méthode de travail avec l'IA générative, présentée en 4 étapes plutôt
+  // qu'en multitude de petites cartes.
+  aiSteps: [
+    {
+      step: "01",
+      title: "Clarifier",
+      text: "Je formule clairement l'objectif et le contexte avant de solliciter l'IA.",
+      example: "Un brief de dossier reformulé en quelques lignes claires.",
+      keywords: ["Brief", "Contexte"],
+    },
+    {
+      step: "02",
+      title: "Structurer",
+      text: "Je structure l'information : plan, arguments, données à mobiliser.",
+      example: "Un dossier d'appel à projets organisé en sections argumentées.",
+      keywords: ["Plan", "Arguments"],
+    },
+    {
+      step: "03",
+      title: "Produire",
+      text: "Je génère un premier jet rédactionnel ou visuel, rapidement exploitable.",
+      example: "Une note de synthèse ou un support prêt à être relu.",
+      keywords: ["Rédaction", "Synthèse"],
+    },
+    {
+      step: "04",
+      title: "Améliorer",
+      text: "Je relis, corrige et affine pour garder rigueur et ton professionnel.",
+      example: "Un livrable final cohérent avec les attentes du financeur.",
+      keywords: ["Relecture", "Qualité"],
+    },
+  ],
+
   engagements: {
-    intro:
-      "En parallèle de mon activité professionnelle, je m'implique dans des structures associatives qui renforcent mon engagement territorial, ma capacité de gestion et mon sens des responsabilités.",
+    intro: "En parallèle de mon activité professionnelle, je m'implique dans des structures associatives qui renforcent mon engagement territorial, ma capacité de gestion et mon sens des responsabilités.",
     items: [
       {
         org: "Maison de l'Europe Océan Indien",
         role: "Trésorier",
+        bigWord: "Gouvernance",
         text: "Participation à la gouvernance associative et au suivi financier d'une structure tournée vers l'Europe, la coopération et l'ouverture régionale dans l'océan Indien.",
-        tags: ["Trésorerie", "Gouvernance", "Coopération", "Engagement"],
+        tags: ["Trésorerie", "Gouvernance"],
       },
       {
         org: "Réunion Prévention Moto",
         role: "Président",
+        bigWord: "Prévention",
         text: "Pilotage d'une association engagée dans la prévention moto, la sensibilisation et la responsabilisation des usagers de deux-roues à La Réunion.",
-        tags: ["Présidence", "Prévention", "Sécurité routière", "Coordination"],
+        tags: ["Présidence", "Prévention"],
       },
     ],
   },
-
-  aiUsage: [
-    { title: "Rédaction professionnelle", text: "Mails, comptes-rendus et documents de cadrage rédigés ou affinés avec l'appui de l'IA." },
-    { title: "Synthèse de documents", text: "Résumé et structuration de dossiers volumineux pour en extraire l'essentiel rapidement." },
-    { title: "Structuration de dossiers", text: "Mise en forme et organisation de dossiers complexes, notamment pour les appels à projets." },
-    { title: "Préparation d'appels à projets", text: "Aide à la formulation, à l'argumentaire et à la mise en cohérence des réponses." },
-    { title: "Prompts avancés", text: "Construction de prompts précis et itératifs pour obtenir des résultats exploitables directement." },
-    { title: "Automatisation de tâches", text: "Mise en place de routines pour automatiser des tâches répétitives du quotidien." },
-    { title: "Aide à la décision", text: "Comparaison d'options, mise en évidence des risques et synthèse d'éléments de choix." },
-    { title: "Appui à la gestion de projet", text: "Suivi de plannings, reformulation d'objectifs et clarification des livrables." },
-    { title: "Veille et expérimentation", text: "Test régulier de nouveaux usages pour identifier ce qui apporte une vraie valeur opérationnelle." },
-    { title: "Création visuelle assistée", text: "Production et retouche de contenus visuels avec l'appui d'outils d'IA." },
-  ],
 
   skills: {
     categories: [
-      {
-        name: "Gestion / coordination",
-        items: ["Pilotage d'équipes", "Gestion de planning", "Suivi budgétaire", "Bilans d'activité"],
-      },
-      {
-        name: "Formation / pédagogie",
-        items: ["Ingénierie de formation", "Conception de parcours", "Évaluation pédagogique", "Qualiopi"],
-      },
-      {
-        name: "Numérique / web",
-        items: ["HTML/CSS", "WordPress / CMS", "Inclusion numérique", "Certifications Pix & TOSA"],
-      },
-      {
-        name: "IA générative",
-        items: ["ChatGPT", "Prompting avancé", "Automatisation", "Synthèse documentaire"],
-      },
-      {
-        name: "Création visuelle",
-        items: ["Photoshop", "Illustrator", "Premiere Pro", "Photographie"],
-      },
-      {
-        name: "Bureautique / gestion",
-        items: ["Excel", "Word", "PowerPoint", "Google Workspace", "Asana"],
-      },
+      { name: "Pilotage & coordination", items: ["Gestion d'équipes", "Planning", "Budgets"] },
+      { name: "Formation & pédagogie", items: ["Ingénierie de formation", "Qualiopi", "Pix & TOSA"] },
+      { name: "IA générative", items: ["ChatGPT", "Prompting", "Automatisation"] },
+      { name: "Numérique & web", items: ["HTML/CSS", "WordPress / CMS", "Inclusion numérique"] },
+      { name: "Création visuelle", items: ["Photoshop", "Illustrator", "Premiere Pro"] },
+      { name: "Bureautique & gestion", items: ["Excel", "Google Workspace", "Asana"] },
     ],
   },
-
-  tools: [
-    "ChatGPT / IA générative",
-    "Asana",
-    "Google Workspace",
-    "Microsoft Office",
-    "Excel",
-    "Word",
-    "PowerPoint",
-    "WordPress / CMS",
-    "Photoshop",
-    "Illustrator",
-    "Premiere Pro",
-    "HTML/CSS",
-  ],
 
   formations: [
     { year: "2025", title: "Contribuer à la gestion d'entreprise", org: "CCI — Chambre de commerce et d'industrie" },
