@@ -82,6 +82,30 @@
     timeline.appendChild(li);
   });
 
+  /* ---------------- Engagements associatifs ---------------- */
+  document.getElementById("engagementsIntro").textContent = d.engagements.intro;
+  var engagementsGrid = document.getElementById("engagementsGrid");
+  d.engagements.items.forEach(function (item) {
+    var card = el("article", "card reveal");
+    var h3 = el("h3");
+    h3.textContent = item.org;
+    var role = el("p", "card-role");
+    role.textContent = item.role;
+    var p = el("p");
+    p.textContent = item.text;
+    var tagRow = el("div", "tag-row");
+    item.tags.forEach(function (tag) {
+      var span = el("span", "tag");
+      span.textContent = tag;
+      tagRow.appendChild(span);
+    });
+    card.appendChild(h3);
+    card.appendChild(role);
+    card.appendChild(p);
+    card.appendChild(tagRow);
+    engagementsGrid.appendChild(card);
+  });
+
   /* ---------------- AI usage ---------------- */
   var aiGrid = document.getElementById("aiGrid");
   d.aiUsage.forEach(function (item) {

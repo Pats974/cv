@@ -123,6 +123,25 @@ const SITE_DATA = {
     },
   ],
 
+  engagements: {
+    intro:
+      "En parallèle de mon activité professionnelle, je m'implique dans des structures associatives qui renforcent mon engagement territorial, ma capacité de gestion et mon sens des responsabilités.",
+    items: [
+      {
+        org: "Maison de l'Europe Océan Indien",
+        role: "Trésorier",
+        text: "Participation à la gouvernance associative et au suivi financier d'une structure tournée vers l'Europe, la coopération et l'ouverture régionale dans l'océan Indien.",
+        tags: ["Trésorerie", "Gouvernance", "Coopération", "Engagement"],
+      },
+      {
+        org: "Réunion Prévention Moto",
+        role: "Président",
+        text: "Pilotage d'une association engagée dans la prévention moto, la sensibilisation et la responsabilisation des usagers de deux-roues à La Réunion.",
+        tags: ["Présidence", "Prévention", "Sécurité routière", "Coordination"],
+      },
+    ],
+  },
+
   aiUsage: [
     { title: "Rédaction professionnelle", text: "Mails, comptes-rendus et documents de cadrage rédigés ou affinés avec l'appui de l'IA." },
     { title: "Synthèse de documents", text: "Résumé et structuration de dossiers volumineux pour en extraire l'essentiel rapidement." },
