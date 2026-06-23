@@ -277,22 +277,35 @@ h1, h2, h3 {
   width: 100%;
   height: auto;
 }
-.hero-photo-frame {
-  margin: 0;
-  padding: 14px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  box-shadow: var(--shadow);
-  max-width: 320px;
-  margin-inline: auto;
+.g-frame {
+  fill: var(--surface);
+  stroke: var(--border);
+  stroke-width: 1.5;
 }
-
-.hero-photo {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  border: 1px solid var(--accent-soft);
+.g-line {
+  stroke: var(--border);
+  stroke-width: 1.5;
+}
+.g-line--soft {
+  stroke: var(--accent-soft);
+}
+.g-circle {
+  fill: var(--accent-soft);
+  stroke: var(--gold);
+  stroke-width: 1.5;
+}
+.g-bar {
+  fill: var(--accent);
+}
+.g-bar--soft {
+  fill: var(--accent-soft);
+}
+.g-mono {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 22px;
+  fill: var(--text-muted);
+  letter-spacing: 0.05em;
 }
 
 /* =========================================================
