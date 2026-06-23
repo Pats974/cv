@@ -128,6 +128,21 @@ Pour l'activer un jour si nécessaire :
    dans `css/style.css`) est calibré pour calmer une photo de lave intense ;
    réajuste-le si la nouvelle image est déjà claire ou peu saturée.
 
+## Palette
+
+Définie en haut de [`css/style.css`](css/style.css) (custom properties) :
+
+- Base claire : `--bg` (ivoire), `--sand` (sable, section "Ce que j'apporte").
+- Texte : `--text` (graphite), `--accent` (bleu nuit, ex. bloc Piloter et
+  bloc Contact).
+- Accent principal : `--lava` (orange lave, bouton principal, bloc
+  "Créer avec l'IA") et `--amber` (touches chaudes, lueur du hero).
+- Accent secondaire : `--green` (vert profond, bloc Former) et `--copper`
+  (brun minéral, bloc Structurer).
+
+Chaque bloc de "Ce que j'apporte" et chaque étape de "IA & création" a sa
+propre couleur dans cette palette (pas de couleur ajoutée hors système).
+
 ## Animations
 
 - Apparitions douces des sections au scroll (`IntersectionObserver`).

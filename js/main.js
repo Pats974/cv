@@ -24,7 +24,7 @@
   /* ---------------- Territoires : "Ce que j'apporte" ---------------- */
   var territoryList = document.getElementById("territoryList");
   d.territories.forEach(function (t) {
-    var article = el("article", "territory reveal" + (t.accent ? " territory--accent" : ""));
+    var article = el("article", "territory reveal territory--" + t.id);
     article.id = "territoire-" + t.id;
 
     var inner = el("div", "territory-inner");
@@ -152,7 +152,7 @@
   creativeH3.textContent = creative.title;
   var creativeP = el("p");
   creativeP.textContent = creative.text;
-  var creativeA = el("a");
+  var creativeA = el("a", "btn btn-primary");
   creativeA.href = creative.linkUrl;
   creativeA.target = "_blank";
   creativeA.rel = "noopener";

@@ -63,7 +63,6 @@ const SITE_DATA = {
       title: "Créer avec l'IA",
       text: "Synthèse, rédaction, automatisation, supports et visuels — l'IA comme outil de production.",
       keywords: ["Synthèse", "Automatisation", "Visuels"],
-      accent: true,
     },
   ],
 

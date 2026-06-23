@@ -4,6 +4,8 @@
 :root {
   --bg: #fafaf8;
   --bg-alt: #f3f2ee;
+  --sand: #f3e9d8;
+  --sand-line: #e3d3b6;
   --surface: #ffffff;
   --border: #e6e3da;
   --text: #1a1a17;
@@ -13,6 +15,11 @@
   --lava: #c1572f;
   --lava-soft: rgba(193, 87, 47, 0.1);
   --lava-line: rgba(193, 87, 47, 0.35);
+  --amber: #d98a3d;
+  --green: #2f4d3a;
+  --green-soft: rgba(47, 77, 58, 0.1);
+  --copper: #9c5b2e;
+  --copper-soft: rgba(156, 91, 46, 0.1);
   --radius: 14px;
   --shadow: 0 1px 2px rgba(20, 20, 18, 0.04), 0 8px 24px rgba(20, 20, 18, 0.05);
   --max-width: 1160px;
@@ -255,10 +262,25 @@ h1, h2, h3 {
   padding: 120px 0 90px;
 }
 
+/* Lueur chaude derrière le visuel : déborde légèrement sur la zone de
+   texte pour réchauffer toute la composition, sans gêner la lecture. */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 10%;
+  left: 30%;
+  width: 46%;
+  height: 70%;
+  background: radial-gradient(circle, rgba(217, 138, 61, 0.32) 0%, rgba(217, 138, 61, 0) 70%);
+  filter: blur(40px);
+  z-index: 0;
+  pointer-events: none;
+}
+
 .hero-bg {
   position: absolute;
   inset: 0;
-  left: 48%;
+  left: 46%;
   z-index: 0;
   overflow: hidden;
 }
@@ -269,15 +291,14 @@ h1, h2, h3 {
   object-fit: cover;
   transform: translateY(0);
   will-change: transform;
-  /* Calme l'intensité de la photo sans la dénaturer : moins saturée et
-     plus claire, pour rester un signal discret plutôt qu'une affiche. */
-  filter: saturate(0.62) brightness(1.1) contrast(0.95);
+  /* Présente la photo de façon plus affirmée, tout en restant lisible. */
+  filter: saturate(0.8) brightness(1.04) contrast(1);
 }
 
 .hero-bg-fade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, var(--bg) 0%, rgba(250, 250, 248, 0) 38%);
+  background: linear-gradient(90deg, var(--bg) 0%, rgba(250, 250, 248, 0) 36%);
 }
 
 .hero-bg-overlay {
@@ -285,9 +306,9 @@ h1, h2, h3 {
   inset: 0;
   background: linear-gradient(
     160deg,
-    rgba(250, 250, 248, 0.82) 0%,
-    rgba(250, 250, 248, 0.48) 45%,
-    rgba(250, 250, 248, 0.7) 100%
+    rgba(250, 244, 232, 0.62) 0%,
+    rgba(250, 244, 232, 0.22) 45%,
+    rgba(250, 244, 232, 0.5) 100%
   );
 }
 
@@ -353,6 +374,10 @@ h1, h2, h3 {
 }
 .section-alt {
   background: var(--bg-alt);
+}
+
+.section-sand {
+  background: var(--sand);
 }
 
 .section-title {
@@ -439,17 +464,17 @@ h1, h2, h3 {
 }
 
 .territory {
+  position: relative;
   border-top: 1px solid var(--border);
+  border-left: 5px solid var(--t-color, var(--border));
+  background: var(--t-soft, var(--surface));
   transition: background 0.3s ease;
 }
 .territory:last-child {
   border-bottom: 1px solid var(--border);
 }
-.territory:nth-child(even) {
-  background: var(--surface);
-}
 .territory:hover {
-  background: var(--accent-soft);
+  background: var(--t-soft-hover, var(--accent-soft));
 }
 
 .territory-inner {
@@ -465,12 +490,13 @@ h1, h2, h3 {
 .territory-number {
   font-size: clamp(3rem, 6vw, 5rem);
   font-weight: 800;
-  color: var(--border);
+  color: var(--t-color, var(--border));
+  opacity: 0.32;
   line-height: 1;
-  transition: color 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 .territory:hover .territory-number {
-  color: var(--lava-line);
+  opacity: 0.55;
 }
 
 .territory-body {
@@ -496,29 +522,52 @@ h1, h2, h3 {
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.07em;
-  color: var(--lava);
+  color: var(--t-color, var(--lava));
   font-weight: 700;
   margin: 0;
 }
 
+/* Identité couleur par bloc — légère (bordure + accents), pour rester
+   lisible et éviter l'effet carte pleine répétitive. */
+.territory--piloter {
+  --t-color: var(--accent);
+  --t-soft: var(--accent-soft);
+  --t-soft-hover: #dde6ea;
+}
+.territory--former {
+  --t-color: var(--green);
+  --t-soft: var(--green-soft);
+  --t-soft-hover: rgba(47, 77, 58, 0.16);
+}
+.territory--structurer {
+  --t-color: var(--copper);
+  --t-soft: var(--copper-soft);
+  --t-soft-hover: rgba(156, 91, 46, 0.16);
+}
+
 /* Le 4e territoire ("Créer avec l'IA") casse la répétition avec une
-   couleur pleine, pour faire ressortir l'IA comme différenciant. */
-.territory--accent {
-  background: var(--accent) !important;
+   couleur pleine lave/ambre, pour faire ressortir l'IA comme différenciant. */
+.territory--creer {
+  border-left-color: var(--lava);
+  background: linear-gradient(115deg, var(--lava) 0%, var(--amber) 100%) !important;
   color: #fff;
 }
-.territory--accent .territory-number {
-  color: rgba(255, 255, 255, 0.28);
+.territory--creer .territory-number {
+  color: #fff;
+  opacity: 0.3;
 }
-.territory--accent:hover {
-  background: #15303f !important;
+.territory--creer:hover {
+  background: linear-gradient(115deg, #a3461f 0%, var(--lava) 100%) !important;
 }
-.territory--accent .territory-body h3,
-.territory--accent .territory-body p {
+.territory--creer:hover .territory-number {
+  opacity: 0.5;
+}
+.territory--creer .territory-body h3,
+.territory--creer .territory-body p {
   color: #fff;
 }
-.territory--accent .territory-keywords {
-  color: #f0a583;
+.territory--creer .territory-keywords {
+  color: rgba(255, 255, 255, 0.85);
 }
 
 /* =========================================================
@@ -597,13 +646,16 @@ h1, h2, h3 {
   font-size: 0.82rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--text-muted);
-  font-weight: 600;
+  color: var(--lava);
+  font-weight: 700;
 }
 
 .timeline-item h3 {
   font-size: 1.22rem;
   margin: 6px 0 2px;
+}
+.timeline-item.is-current h3 {
+  color: var(--accent);
 }
 
 .timeline-org {
@@ -611,6 +663,9 @@ h1, h2, h3 {
   font-weight: 600;
   font-size: 0.95rem;
   margin: 0 0 14px;
+}
+.timeline-item.is-current .timeline-org {
+  color: var(--lava);
 }
 
 .timeline-item ul {
@@ -652,6 +707,8 @@ h1, h2, h3 {
 .section-ai {
   position: relative;
   overflow: hidden;
+  background: radial-gradient(120% 100% at 100% 0%, rgba(217, 138, 61, 0.14) 0%, transparent 55%),
+    var(--bg-alt);
 }
 
 .ai-steps-bg {
@@ -687,16 +744,29 @@ h1, h2, h3 {
   top: 0;
   height: 100%;
   width: var(--ai-progress, 0%);
-  background: var(--lava);
+  background: linear-gradient(90deg, var(--accent) 0%, var(--green) 34%, var(--copper) 67%, var(--lava) 100%);
   transition: width 0.2s ease;
 }
 
 .ai-step {
+  --s-color: var(--lava);
   position: relative;
   padding-top: 24px;
   opacity: 0.5;
   transform: translateY(10px);
   transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.ai-step:nth-child(1) {
+  --s-color: var(--accent);
+}
+.ai-step:nth-child(2) {
+  --s-color: var(--green);
+}
+.ai-step:nth-child(3) {
+  --s-color: var(--copper);
+}
+.ai-step:nth-child(4) {
+  --s-color: var(--lava);
 }
 .ai-step.is-active {
   opacity: 1;
@@ -712,18 +782,18 @@ h1, h2, h3 {
   height: 10px;
   border-radius: 50%;
   background: var(--surface);
-  border: 2px solid var(--lava);
+  border: 2px solid var(--s-color);
   transition: background 0.3s ease;
 }
 .ai-step.is-active::before {
-  background: var(--lava);
+  background: var(--s-color);
 }
 
 .ai-step-number {
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.08em;
-  color: var(--lava);
+  color: var(--s-color);
 }
 
 .ai-step h3 {
@@ -750,33 +820,25 @@ h1, h2, h3 {
 .creative-block {
   position: relative;
   margin-top: 64px;
-  padding: 36px 32px;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  padding: 40px 36px;
+  background: linear-gradient(135deg, var(--sand) 0%, var(--lava-soft) 100%);
+  border: 1px solid var(--sand-line);
   border-radius: 20px;
   max-width: 760px;
 }
 .creative-block h3 {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   margin: 0 0 10px;
   color: var(--accent);
 }
 .creative-block p {
   color: var(--text-muted);
   font-size: 0.98rem;
-  margin: 0 0 16px;
+  margin: 0 0 22px;
   max-width: 64ch;
 }
-.creative-block a {
-  font-size: 0.92rem;
-  font-weight: 700;
-  color: var(--lava);
-  text-decoration: none;
-  border-bottom: 1px solid var(--lava);
-}
-.creative-block a:hover {
-  color: var(--accent);
-  border-color: var(--accent);
+.creative-block .btn {
+  box-shadow: 0 8px 20px rgba(193, 87, 47, 0.25);
 }
 
 /* =========================================================
@@ -878,8 +940,39 @@ h1, h2, h3 {
 }
 
 /* =========================================================
-   Contact (bloc dans la section finale)
+   Contact (bloc dans la section finale) — aplat bleu nuit
    ========================================================= */
+.final-block--dark {
+  background: linear-gradient(150deg, var(--accent) 0%, #15303f 100%);
+  color: #fff;
+  padding: 36px 32px;
+  border-radius: 22px;
+}
+.final-block--dark .eyebrow {
+  color: var(--amber);
+}
+.final-block--dark .subsection-title-lg {
+  color: #fff;
+}
+.final-block--dark .final-lead {
+  color: rgba(255, 255, 255, 0.78);
+}
+.final-block--dark .contact-list li {
+  color: rgba(255, 255, 255, 0.88);
+}
+.final-block--dark .contact-list a {
+  color: #fff;
+  text-decoration: underline;
+}
+.final-block--dark .btn-secondary {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.55);
+  color: #fff;
+}
+.final-block--dark .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
 .contact-list li {
   padding: 8px 0;
   font-size: 0.98rem;
