@@ -298,7 +298,7 @@ h1, h2, h3 {
 }
 
 .hero-content {
-  max-width: 640px;
+  max-width: 660px;
 }
 
 .eyebrow {
@@ -307,26 +307,27 @@ h1, h2, h3 {
   font-size: 0.78rem;
   color: var(--lava);
   font-weight: 700;
-  margin: 0 0 16px;
-}
-
-.hero h1 {
-  font-size: clamp(2.6rem, 6.2vw, 5.1rem);
   margin: 0 0 18px;
 }
 
+.hero h1 {
+  font-size: clamp(2.8rem, 6.6vw, 5.6rem);
+  margin: 0 0 20px;
+}
+
 .hero-role {
-  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
-  color: var(--text-muted);
-  margin: 0 0 22px;
+  font-size: clamp(1.1rem, 1.7vw, 1.3rem);
+  color: var(--text);
+  margin: 0 0 24px;
   max-width: 46ch;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .hero-tagline {
-  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
-  max-width: 50ch;
-  margin: 0 0 36px;
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+  color: var(--text-muted);
+  max-width: 48ch;
+  margin: 0 0 40px;
   font-weight: 500;
 }
 
@@ -336,48 +337,11 @@ h1, h2, h3 {
   gap: 14px;
 }
 
-.hero-scroll-cue {
-  position: absolute;
-  left: 50%;
-  bottom: 30px;
-  transform: translateX(-50%);
-  width: 26px;
-  height: 42px;
-  border: 1.5px solid var(--border);
-  border-radius: 999px;
-  z-index: 2;
-  display: flex;
-  justify-content: center;
-  padding-top: 8px;
-}
-
-.hero-scroll-cue span {
-  width: 4px;
-  height: 8px;
-  border-radius: 999px;
-  background: var(--lava);
-  animation: scrollCue 2.6s ease-in-out infinite;
-}
-
-@keyframes scrollCue {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  70% {
-    opacity: 0.15;
-  }
-  100% {
-    transform: translateY(15px);
-    opacity: 0;
-  }
-}
-
 /* =========================================================
    Sections (rythme général)
    ========================================================= */
 .section {
-  padding: 100px 0;
+  padding: 120px 0;
 }
 .section-alt {
   background: var(--bg-alt);
@@ -406,7 +370,7 @@ h1, h2, h3 {
    À propos — section éditoriale
    ========================================================= */
 .section-editorial {
-  padding: 90px 0;
+  padding: 110px 0;
 }
 
 .editorial-grid {
@@ -717,23 +681,7 @@ h1, h2, h3 {
 
 .ai-step p {
   color: var(--text-muted);
-  font-size: 0.93rem;
-  margin: 0 0 10px;
-}
-
-.ai-step-example {
-  font-size: 0.86rem;
-  font-style: italic;
-  color: var(--text);
-  margin: 0 0 10px;
-}
-
-.ai-step-keywords {
-  font-size: 0.74rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--accent);
-  font-weight: 700;
+  font-size: 0.95rem;
   margin: 0;
 }
 
@@ -831,7 +779,7 @@ h1, h2, h3 {
    Compétences & outils — section compacte
    ========================================================= */
 .section-compact {
-  padding: 70px 0;
+  padding: 84px 0;
 }
 
 .skills-compact {
@@ -894,7 +842,7 @@ h1, h2, h3 {
    Contact
    ========================================================= */
 .section-contact {
-  padding: 110px 0;
+  padding: 130px 0;
 }
 
 .contact-grid {
@@ -1027,9 +975,6 @@ h1, h2, h3 {
       rgba(250, 250, 248, 0.25) 0%,
       rgba(250, 250, 248, 0.55) 100%
     );
-  }
-  .hero-scroll-cue {
-    display: none;
   }
 
   .experience-layout {

@@ -132,48 +132,21 @@ const SITE_DATA = {
     highlights: ["Direction pédagogique", "Coordination", "IA générative"],
   },
 
-  // Méthode de travail avec l'IA générative, présentée en 4 étapes plutôt
-  // qu'en multitude de petites cartes.
+  // Méthode de travail avec l'IA générative, présentée en 4 étapes simples.
   aiSteps: [
-    {
-      step: "01",
-      title: "Clarifier",
-      text: "Je formule clairement l'objectif et le contexte avant de solliciter l'IA.",
-      example: "Un brief de dossier reformulé en quelques lignes claires.",
-      keywords: ["Brief", "Contexte"],
-    },
-    {
-      step: "02",
-      title: "Structurer",
-      text: "Je structure l'information : plan, arguments, données à mobiliser.",
-      example: "Un dossier d'appel à projets organisé en sections argumentées.",
-      keywords: ["Plan", "Arguments"],
-    },
-    {
-      step: "03",
-      title: "Produire",
-      text: "Je génère un premier jet rédactionnel ou visuel, rapidement exploitable.",
-      example: "Une note de synthèse ou un support prêt à être relu.",
-      keywords: ["Rédaction", "Synthèse"],
-    },
-    {
-      step: "04",
-      title: "Améliorer",
-      text: "Je relis, corrige et affine pour garder rigueur et ton professionnel.",
-      example: "Un livrable final cohérent avec les attentes du financeur.",
-      keywords: ["Relecture", "Qualité"],
-    },
+    { step: "01", title: "Clarifier", text: "Je formule clairement l'objectif et le contexte avant de solliciter l'IA." },
+    { step: "02", title: "Structurer", text: "Je structure l'information : plan, arguments, données à mobiliser." },
+    { step: "03", title: "Produire", text: "Je génère un premier jet rédactionnel ou visuel, rapidement exploitable." },
+    { step: "04", title: "Améliorer", text: "Je relis, corrige et affine pour garder rigueur et ton professionnel." },
   ],
 
-  // Usages concrets, affichés en une ligne sobre sous les 4 étapes
+  // Exemples très concrets, affichés en une ligne sobre sous les 4 étapes
   // (pas de badges) pour ancrer la méthode dans des cas réels.
   aiExamples: [
+    "Réponse à appel à projets",
     "Synthèse de documents",
-    "Structuration de dossiers",
-    "Réponses à appels à projets",
-    "Supports pédagogiques",
+    "Support pédagogique",
     "Aide à la décision",
-    "Automatisation de tâches",
   ],
 
   engagements: {

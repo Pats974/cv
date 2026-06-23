@@ -122,24 +122,16 @@
     var p = el("p");
     p.textContent = step.text;
 
-    var example = el("p", "ai-step-example");
-    example.textContent = "Exemple : " + step.example;
-
-    var keywords = el("p", "ai-step-keywords");
-    keywords.textContent = step.keywords.join(" · ");
-
     item.appendChild(number);
     item.appendChild(h3);
     item.appendChild(p);
-    item.appendChild(example);
-    item.appendChild(keywords);
     aiSteps.appendChild(item);
     aiStepEls.push(item);
   });
 
   var aiExamples = document.getElementById("aiExamples");
   if (aiExamples && d.aiExamples) {
-    aiExamples.textContent = "Quelques usages concrets : " + d.aiExamples.join(" · ") + ".";
+    aiExamples.textContent = "Exemples concrets : " + d.aiExamples.join(" · ") + ".";
   }
 
   /* ---------------- Engagements associatifs ---------------- */
