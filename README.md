@@ -15,7 +15,10 @@ Site **100 % statique**, sans framework ni étape de build :
   formations, certifications, contact, liens...). C'est le fichier à modifier
   pour mettre à jour le contenu.
 - `js/main.js` — rendu dynamique du contenu à partir de `data.js`, navigation
-  mobile, lien actif au scroll, animations d'apparition.
+  mobile, lien actif au scroll, animations d'apparition, réseau de bulles du
+  hero, connecteurs entre sections, chaîne visuelle de la section IA.
+- `assets/images/volcan-02.jpg` — photo signature (coulée de lave), utilisée
+  comme visuel maîtrisé dans le hero, jamais en fond pleine page.
 - `assets/` — favicon et dossier prévu pour le CV PDF.
 
 Aucune dépendance externe (pas de `node_modules`, pas de CDN) : le site
@@ -77,6 +80,21 @@ Tout le contenu modifiable se trouve dans [`js/data.js`](js/data.js) :
 - `aiUsage` — usages concrets de l'IA générative.
 - `skills` / `tools` — compétences par catégorie et outils utilisés.
 - `formations` / `certifications` / `languages` / `interests`.
+- `engagements` — engagements associatifs (intro + cartes).
+- `heroNetwork` — les 8 bulles du hero (`nodes`, coordonnées en % sur 0-100)
+  et leurs connexions (`edges`). Passe `animated: true` sur une arête pour
+  lui ajouter le tracé discret + point lumineux.
+- `aiFlow` — les 6 étapes de la chaîne visuelle de la section IA générative.
+
+### Remplacer la photo volcan
+
+1. Dépose la nouvelle image dans `assets/images/` (carré, ≥ 700×700 px
+   conseillé : elle est recadrée en cercle/carré arrondi et partiellement
+   masquée par un dégradé clair, un cadrage serré et lumineux fonctionne
+   mieux qu'une photo très sombre).
+2. Mets à jour `hero.volcanoImage` dans `js/data.js`.
+3. Réoptimise la nouvelle image (voir « Optimisation d'image » ci-dessous)
+   avant de la committer : ne jamais committer un fichier brut de plusieurs Mo.
 
 ### Activer le téléchargement du CV
 
@@ -92,6 +110,32 @@ Pour l'activer un jour si nécessaire :
 1. Décommente la ligne `phone:` dans `js/data.js` et renseigne le numéro.
 2. Décommente les lignes correspondantes dans `js/main.js` (section
    "Contact").
+
+## Animations
+
+- Flottement très lent des bulles du hero (CSS `@keyframes`), tracé discret
+  et point lumineux sur 2 connexions du réseau, micro-interactions au survol
+  des cartes/badges, apparitions douces au scroll (`IntersectionObserver`).
+- Tout est CSS/SVG natif, aucune librairie d'animation ajoutée.
+- `@media (prefers-reduced-motion: reduce)` (en haut de `css/style.css`)
+  réduit la durée de toutes les animations/transitions à quasi zéro pour les
+  utilisateurs qui l'ont demandé au niveau système — rien à faire de plus.
+- Pour désactiver une animation précise manuellement, retire la classe ou la
+  règle correspondante dans `css/style.css` (`floatBubble`, `dashFlow`,
+  `dotTravel`, `pulseDot`, `.reveal`).
+
+## Optimisation d'image
+
+- `assets/images/volcan-02.jpg` est recadrée en carré et compressée pour le
+  web (~75 Ko, 760×760 px) : suffisant pour l'usage en carte (jamais affichée
+  en pleine page), y compris sur écrans rétina.
+- Pas de variante WebP fournie : aucun outil de conversion (`cwebp`,
+  Squoosh...) n'était disponible dans cet environnement. Pour aller plus
+  loin, génère `volcan-02.webp` et utilise une balise `<picture>` avec
+  fallback JPEG.
+- L'image du hero n'est pas en `loading="lazy"` : elle est visible dès le
+  chargement (au-dessus de la ligne de flottaison), le lazy-loading y serait
+  contre-productif.
 
 ## Informations sensibles — à ne jamais exposer
 

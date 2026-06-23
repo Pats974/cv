@@ -10,7 +10,9 @@
   --text-muted: #5d5b54;
   --accent: #1f3b4d;
   --accent-soft: #e9eef0;
-  --gold: #b08d57;
+  --lava: #c1572f;
+  --lava-soft: rgba(193, 87, 47, 0.10);
+  --lava-line: rgba(193, 87, 47, 0.35);
   --radius: 14px;
   --shadow: 0 1px 2px rgba(20, 20, 18, 0.04), 0 8px 24px rgba(20, 20, 18, 0.05);
   --max-width: 1120px;
@@ -74,6 +76,18 @@ h1, h2, h3 {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 24px;
+}
+
+/* Défini tôt dans la feuille de style : les règles de composants plus bas
+   (cartes, badges...) peuvent ainsi surcharger "transition" sur hover. */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .skip-link {
@@ -155,7 +169,7 @@ h1, h2, h3 {
   right: 0;
   bottom: -2px;
   height: 2px;
-  background: var(--gold);
+  background: var(--lava);
 }
 
 .nav-toggle {
@@ -222,7 +236,7 @@ h1, h2, h3 {
   border-color: var(--border);
 }
 .btn-ghost:hover {
-  border-color: var(--gold);
+  border-color: var(--lava);
   color: var(--text);
 }
 
@@ -244,7 +258,7 @@ h1, h2, h3 {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   font-size: 0.78rem;
-  color: var(--gold);
+  color: var(--lava);
   font-weight: 700;
   margin: 0 0 14px;
 }
@@ -273,39 +287,187 @@ h1, h2, h3 {
   gap: 14px;
 }
 
-.hero-graphic {
+/* =========================================================
+   Hero visual : carte volcan + réseau de bulles connectées
+   ========================================================= */
+.hero-visual {
+  position: relative;
+}
+
+.hero-network {
+  position: relative;
   width: 100%;
-  height: auto;
+  aspect-ratio: 1;
 }
-.g-frame {
-  fill: var(--surface);
-  stroke: var(--border);
-  stroke-width: 1.5;
+
+.hero-photo-card {
+  position: absolute;
+  top: 19%;
+  left: 19%;
+  right: 19%;
+  bottom: 19%;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background: var(--surface);
+  z-index: 1;
 }
-.g-line {
-  stroke: var(--border);
-  stroke-width: 1.5;
+
+.hero-photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
-.g-line--soft {
-  stroke: var(--accent-soft);
+
+.hero-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    150deg,
+    rgba(250, 250, 248, 0.88) 0%,
+    rgba(250, 250, 248, 0.5) 42%,
+    rgba(250, 250, 248, 0.32) 65%,
+    rgba(250, 250, 248, 0.62) 100%
+  );
 }
-.g-circle {
-  fill: var(--accent-soft);
-  stroke: var(--gold);
-  stroke-width: 1.5;
-}
-.g-bar {
-  fill: var(--accent);
-}
-.g-bar--soft {
-  fill: var(--accent-soft);
-}
-.g-mono {
-  font-family: var(--font-sans);
+
+.hero-photo-caption {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(4px);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 0.7rem;
   font-weight: 700;
-  font-size: 22px;
-  fill: var(--text-muted);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.hero-network-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  overflow: visible;
+}
+
+.network-line {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 0.6;
+}
+
+.network-line--animated {
+  stroke: var(--lava-line);
+  stroke-dasharray: 3 2.5;
+  animation: dashFlow 7s linear infinite;
+}
+
+.network-dot {
+  fill: var(--lava);
+  opacity: 0.85;
+  animation: dotTravel 7s linear infinite;
+}
+
+.hero-bubble-pos {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+
+.hero-bubble {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.74);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text);
+  box-shadow: 0 4px 14px rgba(20, 20, 18, 0.06);
+  white-space: nowrap;
+  animation: floatBubble 7s ease-in-out infinite alternate;
+}
+
+.hero-bubble-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--lava);
+  flex-shrink: 0;
+}
+
+@keyframes floatBubble {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes dashFlow {
+  to {
+    stroke-dashoffset: -22;
+  }
+}
+
+@keyframes dotTravel {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.85;
+  }
+  92% {
+    opacity: 0.85;
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+
+/* =========================================================
+   Connecteurs entre sections
+   ========================================================= */
+.section-connector {
+  position: relative;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-connector::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--border), transparent);
+}
+
+.section-connector::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1.5px solid var(--lava);
+  position: relative;
+  z-index: 1;
 }
 
 /* =========================================================
@@ -361,12 +523,45 @@ h1, h2, h3 {
   max-width: 880px;
 }
 
-.card {
+.card,
+.ai-item,
+.skill-card {
+  position: relative;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 26px;
   box-shadow: var(--shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card::after,
+.ai-item::after,
+.skill-card::after {
+  content: "";
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.card:hover,
+.ai-item:hover,
+.skill-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(20, 20, 18, 0.09);
+  border-color: var(--lava-line);
+}
+
+.card:hover::after,
+.ai-item:hover::after,
+.skill-card:hover::after {
+  background: var(--lava);
+  transform: scale(1.3);
 }
 
 .card h3 {
@@ -427,11 +622,11 @@ h1, h2, h3 {
   height: 14px;
   border-radius: 50%;
   background: var(--surface);
-  border: 2.5px solid var(--gold);
+  border: 2.5px solid var(--lava);
 }
 
 .timeline-item.is-current::before {
-  background: var(--gold);
+  background: var(--lava);
 }
 
 .timeline-period {
@@ -474,7 +669,7 @@ h1, h2, h3 {
   top: 10px;
   width: 6px;
   height: 1.5px;
-  background: var(--gold);
+  background: var(--lava);
 }
 
 .timeline-link {
@@ -484,7 +679,7 @@ h1, h2, h3 {
   font-weight: 600;
   color: var(--accent);
   text-decoration: none;
-  border-bottom: 1px solid var(--gold);
+  border-bottom: 1px solid var(--lava);
 }
 
 /* =========================================================
@@ -498,9 +693,6 @@ h1, h2, h3 {
 
 .ai-item {
   padding: 20px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
 }
 
 .ai-item h3 {
@@ -515,6 +707,56 @@ h1, h2, h3 {
   color: var(--text-muted);
 }
 
+/* Chaîne visuelle "méthode" de la section IA générative */
+.ai-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0 0 40px;
+}
+
+.ai-flow-node {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--accent);
+  box-shadow: var(--shadow);
+}
+
+.ai-flow-connector {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 2px;
+  background: var(--lava-line);
+  margin: 0 6px;
+  position: relative;
+}
+
+.ai-flow-connector::after {
+  content: "";
+  position: absolute;
+  right: -3px;
+  top: -2.5px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--lava);
+  opacity: 0.85;
+  animation: pulseDot 3.4s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
 /* =========================================================
    Skills
    ========================================================= */
@@ -525,15 +767,18 @@ h1, h2, h3 {
 }
 
 .skill-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
   padding: 22px;
 }
 
 .skill-card h3 {
-  font-size: 0.98rem;
-  margin: 0 0 14px;
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin: 0 0 16px;
+  padding: 6px 14px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-radius: 999px;
 }
 
 .badge-row {
@@ -549,6 +794,13 @@ h1, h2, h3 {
   border: 1px solid var(--border);
   background: var(--surface);
   color: var(--text);
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.badge:hover {
+  border-color: var(--lava);
+  color: var(--lava);
+  transform: translateY(-1px);
 }
 
 /* =========================================================
@@ -628,29 +880,17 @@ h1, h2, h3 {
 }
 
 /* =========================================================
-   Scroll reveal
-   ========================================================= */
-.reveal {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* =========================================================
    Responsive
    ========================================================= */
 @media (max-width: 860px) {
   .hero-inner {
     grid-template-columns: 1fr;
   }
+  /* Le texte passe en premier ; le visuel volcan + bulles suit, réduit. */
   .hero-visual {
-    order: -1;
-    max-width: 280px;
-    margin: 0 auto;
+    width: 100%;
+    max-width: 340px;
+    margin: 32px auto 0;
   }
   .two-col,
   .contact-grid {
@@ -659,7 +899,7 @@ h1, h2, h3 {
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 860px) {
   .nav-toggle {
     display: flex;
   }
@@ -717,6 +957,25 @@ h1, h2, h3 {
     flex-direction: column;
     gap: 6px;
   }
+
+  .ai-flow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .ai-flow-connector {
+    width: 2px;
+    height: 22px;
+    margin: 2px 0 2px 17px;
+  }
+  .ai-flow-connector::after {
+    right: -2.5px;
+    top: auto;
+    bottom: -3px;
+  }
+
+  .section-connector {
+    height: 32px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -728,5 +987,36 @@ h1, h2, h3 {
   }
   .timeline-item::before {
     left: -31px;
+  }
+
+  /* Réseau de bulles simplifié : visuel réduit et atténué, moins de nœuds */
+  .hero-visual {
+    width: 100%;
+    max-width: 250px;
+  }
+  .hero-photo-overlay {
+    background: linear-gradient(
+      150deg,
+      rgba(250, 250, 248, 0.92) 0%,
+      rgba(250, 250, 248, 0.62) 45%,
+      rgba(250, 250, 248, 0.45) 65%,
+      rgba(250, 250, 248, 0.74) 100%
+    );
+  }
+  .hero-bubble-pos--secondary {
+    display: none;
+  }
+  .hero-bubble {
+    font-size: 0.62rem;
+    padding: 6px 9px;
+    gap: 4px;
+    white-space: normal;
+    max-width: 86px;
+    text-align: center;
+    line-height: 1.15;
+  }
+  .hero-photo-caption {
+    font-size: 0.6rem;
+    padding: 4px 9px;
   }
 }

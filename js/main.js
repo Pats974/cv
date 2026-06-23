@@ -15,6 +15,79 @@
   document.getElementById("heroRole").textContent = d.hero.role;
   document.getElementById("heroTagline").textContent = d.hero.tagline;
   document.getElementById("heroPhotoLink").href = d.contact.photoPortfolio;
+  document.getElementById("heroVolcanoImg").src = d.hero.volcanoImage;
+
+  /* ---------------- Hero network (bulles connectées) ---------------- */
+  // Nœuds secondaires masqués sur très petit écran pour alléger le visuel.
+  var SECONDARY_NODES = ["photo", "qualiopi", "engagement"];
+
+  (function renderHeroNetwork() {
+    var network = d.heroNetwork;
+    if (!network) return;
+
+    var nodesById = {};
+    network.nodes.forEach(function (node) {
+      nodesById[node.id] = node;
+    });
+
+    var svg = document.getElementById("heroNetworkLines");
+    var bubblesContainer = document.getElementById("heroBubbles");
+
+    network.edges.forEach(function (edge) {
+      var from = nodesById[edge.from];
+      var to = nodesById[edge.to];
+      if (!from || !to) return;
+
+      // Courbe douce : le point de contrôle est tiré légèrement vers le centre.
+      var midX = (from.x + to.x) / 2;
+      var midY = (from.y + to.y) / 2;
+      var ctrlX = midX + (50 - midX) * 0.18;
+      var ctrlY = midY + (50 - midY) * 0.18;
+      var d_attr = "M " + from.x + " " + from.y + " Q " + ctrlX + " " + ctrlY + " " + to.x + " " + to.y;
+
+      var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", d_attr);
+      path.setAttribute("class", "network-line" + (edge.animated ? " network-line--animated" : ""));
+      svg.appendChild(path);
+
+      if (edge.animated) {
+        var dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        dot.setAttribute("r", "0.9");
+        dot.setAttribute("class", "network-dot");
+        dot.style.offsetPath = "path('" + d_attr + "')";
+        dot.style.webkitOffsetPath = "path('" + d_attr + "')";
+        svg.appendChild(dot);
+      }
+    });
+
+    network.nodes.forEach(function (node, index) {
+      var isSecondary = SECONDARY_NODES.indexOf(node.id) !== -1;
+      var pos = el("div", "hero-bubble-pos" + (isSecondary ? " hero-bubble-pos--secondary" : ""));
+      pos.style.left = node.x + "%";
+      pos.style.top = node.y + "%";
+
+      var bubble = el("span", "hero-bubble");
+      bubble.style.animationDuration = 5.5 + (index % 4) * 0.9 + "s";
+      bubble.style.animationDelay = "-" + (index % 5) * 0.7 + "s";
+
+      var dotEl = el("span", "hero-bubble-dot");
+      var label = document.createTextNode(node.label);
+      bubble.appendChild(dotEl);
+      bubble.appendChild(label);
+      pos.appendChild(bubble);
+      bubblesContainer.appendChild(pos);
+    });
+  })();
+
+  /* ---------------- Connecteurs entre sections ---------------- */
+  (function insertSectionConnectors() {
+    var sectionNodes = Array.prototype.slice.call(document.querySelectorAll("main > section"));
+    sectionNodes.slice(0, -1).forEach(function (section) {
+      var connector = el("div", "section-connector");
+      connector.setAttribute("aria-hidden", "true");
+      section.insertAdjacentElement("afterend", connector);
+    });
+  })();
 
   /* ---------------- About ---------------- */
   var aboutText = document.getElementById("aboutText");
@@ -104,6 +177,17 @@
     card.appendChild(p);
     card.appendChild(tagRow);
     engagementsGrid.appendChild(card);
+  });
+
+  /* ---------------- AI flow (méthode en un coup d'œil) ---------------- */
+  var aiFlow = document.getElementById("aiFlow");
+  d.aiFlow.forEach(function (step, index) {
+    var node = el("span", "ai-flow-node");
+    node.textContent = step;
+    aiFlow.appendChild(node);
+    if (index < d.aiFlow.length - 1) {
+      aiFlow.appendChild(el("span", "ai-flow-connector"));
+    }
   });
 
   /* ---------------- AI usage ---------------- */

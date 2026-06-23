@@ -27,8 +27,43 @@ const SITE_DATA = {
     name: "Patrice FONTAINE",
     role: "Directeur adjoint · Directeur pédagogique · Ingénierie de formation & IA générative",
     tagline:
-      "Je structure des projets, j'accompagne des équipes et je mets l'intelligence artificielle générative au service de résultats concrets.",
+      "À la croisée de la formation, du numérique, de l'IA générative et du pilotage de projets — ancré à La Réunion.",
+    // Photo signature : coulée de lave (énergie, ancrage local, intensité maîtrisée).
+    volcanoImage: "assets/images/volcan-02.jpg",
   },
+
+  // Réseau de bulles affiché dans le hero, autour de la carte volcan.
+  // Coordonnées en pourcentage (0-100) sur les deux axes : x = gauche, y = haut.
+  heroNetwork: {
+    nodes: [
+      { id: "direction", label: "Direction", x: 8, y: 14 },
+      { id: "photo", label: "Photo", x: 44, y: 4 },
+      { id: "formation", label: "Formation", x: 74, y: 6 },
+      { id: "ia", label: "IA générative", x: 92, y: 36 },
+      { id: "projets", label: "Projets", x: 82, y: 76 },
+      { id: "qualiopi", label: "Qualiopi", x: 46, y: 94 },
+      { id: "numerique", label: "Numérique", x: 10, y: 80 },
+      { id: "engagement", label: "Engagement", x: 2, y: 46 },
+    ],
+    // Paires d'identifiants reliées par une ligne. "animated: true" ajoute
+    // un tracé discret + un point lumineux qui circule lentement.
+    edges: [
+      { from: "photo", to: "formation" },
+      { from: "formation", to: "ia", animated: true },
+      { from: "ia", to: "projets" },
+      { from: "projets", to: "qualiopi" },
+      { from: "qualiopi", to: "numerique" },
+      { from: "numerique", to: "engagement" },
+      { from: "engagement", to: "direction", animated: true },
+      { from: "direction", to: "photo" },
+      { from: "direction", to: "ia" },
+      { from: "formation", to: "engagement" },
+    ],
+  },
+
+  // Mini chaîne visuelle pour la section IA générative : la méthode de
+  // travail, présentée comme un enchaînement plutôt qu'une simple liste.
+  aiFlow: ["Synthétiser", "Structurer", "Rédiger", "Automatiser", "Décider", "Produire"],
 
   about: {
     paragraphs: [
