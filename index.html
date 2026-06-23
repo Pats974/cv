@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Patrice FONTAINE — Direction pédagogique, ingénierie de formation & IA générative</title>
+  <meta name="description" content="Patrice FONTAINE — Directeur adjoint et directeur pédagogique. Ingénierie de formation, coordination de projets, appels à projets, Qualiopi et usage avancé de l'IA générative." />
+  <meta name="author" content="Patrice FONTAINE" />
+  <meta name="color-scheme" content="light" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Patrice FONTAINE — Direction pédagogique & IA générative" />
+  <meta property="og:description" content="Direction opérationnelle, ingénierie de formation, appels à projets, Qualiopi et IA générative au service de projets qui avancent." />
+  <meta property="og:locale" content="fr_FR" />
+  <!-- Ajoute une image puis décommente la ligne ci-dessous -->
+  <!-- <meta property="og:image" content="assets/og-image.png" /> -->
+
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu principal</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#accueil">PF</a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Ouvrir le menu de navigation">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Navigation principale">
+        <ul>
+          <li><a href="#accueil" data-nav>Accueil</a></li>
+          <li><a href="#apropos" data-nav>À propos</a></li>
+          <li><a href="#expertise" data-nav>Expertise</a></li>
+          <li><a href="#experience" data-nav>Expérience</a></li>
+          <li><a href="#ia-generative" data-nav>IA générative</a></li>
+          <li><a href="#competences" data-nav>Compétences</a></li>
+          <li><a href="#formations" data-nav>Formations</a></li>
+          <li><a href="#contact" data-nav>Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section id="accueil" class="hero">
+      <div class="container hero-inner">
+        <div class="hero-content reveal">
+          <p class="eyebrow">Profil hybride · Direction & numérique</p>
+          <h1 id="heroName"></h1>
+          <p class="hero-role" id="heroRole"></p>
+          <p class="hero-tagline" id="heroTagline"></p>
+          <div class="hero-actions">
+            <a href="#experience" class="btn btn-primary">Voir mon parcours</a>
+            <a href="#contact" class="btn btn-secondary">Me contacter</a>
+            <a id="heroPhotoLink" href="#" target="_blank" rel="noopener" class="btn btn-ghost">Portfolio photo ↗</a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" aria-hidden="true">
+          <svg viewBox="0 0 360 360" class="hero-graphic" role="img" aria-hidden="true">
+            <rect x="20" y="20" width="320" height="320" rx="24" class="g-frame" />
+            <line x1="20" y1="120" x2="340" y2="120" class="g-line" />
+            <circle cx="90" cy="70" r="28" class="g-circle" />
+            <rect x="150" y="160" width="150" height="14" rx="7" class="g-bar" />
+            <rect x="150" y="190" width="110" height="14" rx="7" class="g-bar g-bar--soft" />
+            <rect x="40" y="250" width="280" height="1.5" class="g-line g-line--soft" />
+            <rect x="40" y="280" width="190" height="14" rx="7" class="g-bar g-bar--soft" />
+            <text x="40" y="200" class="g-mono">PF</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- A PROPOS -->
+    <section id="apropos" class="section">
+      <div class="container">
+        <p class="eyebrow reveal">À propos</p>
+        <h2 class="section-title reveal">Un profil construit pour structurer, accompagner et faire avancer</h2>
+        <div class="about-text" id="aboutText"></div>
+      </div>
+    </section>
+
+    <!-- EXPERTISE -->
+    <section id="expertise" class="section section-alt">
+      <div class="container">
+        <p class="eyebrow reveal">Domaines d'expertise</p>
+        <h2 class="section-title reveal">Six terrains d'action complémentaires</h2>
+        <div class="card-grid" id="expertiseGrid"></div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section">
+      <div class="container">
+        <p class="eyebrow reveal">Parcours</p>
+        <h2 class="section-title reveal">Expérience</h2>
+        <ol class="timeline" id="timeline"></ol>
+      </div>
+    </section>
+
+    <!-- IA GENERATIVE -->
+    <section id="ia-generative" class="section section-alt">
+      <div class="container">
+        <p class="eyebrow reveal">Différenciant</p>
+        <h2 class="section-title reveal">IA générative, au quotidien</h2>
+        <p class="section-lead reveal">
+          L'IA générative n'est pas un mot-clé pour moi : c'est un outil de travail que j'utilise
+          chaque jour pour gagner en rigueur, en clarté et en rapidité d'exécution.
+        </p>
+        <div class="ai-grid" id="aiGrid"></div>
+      </div>
+    </section>
+
+    <!-- COMPETENCES -->
+    <section id="competences" class="section">
+      <div class="container">
+        <p class="eyebrow reveal">Boîte à outils</p>
+        <h2 class="section-title reveal">Compétences & outils</h2>
+        <div class="skills-grid" id="skillsGrid"></div>
+
+        <h3 class="subsection-title reveal">Outils utilisés</h3>
+        <div class="badge-row" id="toolsRow"></div>
+      </div>
+    </section>
+
+    <!-- FORMATIONS -->
+    <section id="formations" class="section section-alt">
+      <div class="container">
+        <p class="eyebrow reveal">Parcours académique</p>
+        <h2 class="section-title reveal">Formations & certifications</h2>
+        <div class="two-col">
+          <div class="reveal">
+            <h3 class="subsection-title">Formations</h3>
+            <ul class="clean-list" id="formationsList"></ul>
+          </div>
+          <div class="reveal">
+            <h3 class="subsection-title">Certifications</h3>
+            <ul class="clean-list" id="certificationsList"></ul>
+            <h3 class="subsection-title">Langues</h3>
+            <ul class="clean-list" id="languagesList"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="container">
+        <p class="eyebrow reveal">Contact</p>
+        <h2 class="section-title reveal">Échanger sur un projet, une mission ou une collaboration</h2>
+        <div class="contact-grid reveal">
+          <ul class="contact-list" id="contactList"></ul>
+          <div class="contact-cta">
+            <a id="contactEmailBtn" class="btn btn-primary" href="#">Écrire un email</a>
+            <a id="cvDownloadBtn" class="btn btn-secondary" href="#" hidden>Télécharger le CV</a>
+            <a id="contactPhotoBtn" class="btn btn-ghost" href="#" target="_blank" rel="noopener">Portfolio photo ↗</a>
+          </div>
+        </div>
+        <p class="interests-line">
+          <span>Centres d'intérêt :</span> <span id="interestsLine"></span>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Patrice FONTAINE</p>
+      <p id="footerCity"></p>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
