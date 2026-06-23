@@ -26,7 +26,7 @@ const SITE_DATA = {
   hero: {
     name: "Patrice FONTAINE",
     role: "Directeur adjoint · Directeur pédagogique · Ingénierie de formation & IA générative",
-    tagline: "À la croisée de la formation, du numérique, de l'IA générative et du pilotage de projets.",
+    tagline: "Je structure les projets, accompagne les équipes et transforme les idées en actions concrètes.",
     // Photo signature : coulée de lave (énergie, ancrage local, force tranquille).
     volcanoImage: "assets/images/volcan-02.jpg",
   },
@@ -35,14 +35,13 @@ const SITE_DATA = {
     kicker: "Un profil hybride",
     lead: "Je structure des projets, j'accompagne des équipes et je transforme les idées en actions concrètes.",
     paragraphs: [
-      "Depuis 2018, je pilote au sein d'Emergence OI des missions qui mêlent direction opérationnelle, ingénierie de formation et coordination de projets — du suivi quotidien des équipes jusqu'aux dossiers stratégiques déposés auprès des financeurs.",
-      "Mon profil s'est construit par étapes : développement web, puis gestion de chantier dans le BTP, avant de converger vers la direction pédagogique et la gestion de projet. Au quotidien, j'intègre l'IA générative comme un outil de travail à part entière — pas un effet de mode, une pratique concrète qui fait gagner du temps et de la rigueur à mes équipes.",
+      "Depuis 2018, je pilote au sein d'Emergence OI des missions qui mêlent direction opérationnelle, ingénierie de formation et coordination de projets — du suivi quotidien des équipes jusqu'aux dossiers stratégiques déposés auprès des financeurs. Un parcours construit par étapes : développement web, gestion de chantier dans le BTP, puis direction pédagogique et gestion de projet.",
     ],
   },
 
-  // Cinq grands territoires d'action — remplacent l'ancienne grille de
-  // petites cartes de compétences. Chaque bloc reste sobre : un titre, une
-  // phrase, 3 mots-clés maximum.
+  // Quatre grands piliers — "Ce que j'apporte". Chaque bloc reste sobre :
+  // un titre, une phrase, 3 mots-clés maximum. L'engagement associatif a
+  // sa propre section plus bas, pour ne pas alourdir ce bloc.
   territories: [
     {
       id: "piloter",
@@ -71,13 +70,6 @@ const SITE_DATA = {
       title: "Augmenter avec l'IA",
       text: "J'intègre l'IA générative à mon travail quotidien : rédaction, synthèse, automatisation, aide à la décision.",
       keywords: ["IA générative", "Automatisation", "Décision"],
-    },
-    {
-      id: "engager",
-      number: "05",
-      title: "S'engager",
-      text: "Je m'implique dans des structures associatives tournées vers l'Europe, l'océan Indien et la prévention routière.",
-      keywords: ["Gouvernance", "Prévention", "Territoire"],
     },
   ],
 
@@ -173,21 +165,32 @@ const SITE_DATA = {
     },
   ],
 
+  // Usages concrets, affichés en une ligne sobre sous les 4 étapes
+  // (pas de badges) pour ancrer la méthode dans des cas réels.
+  aiExamples: [
+    "Synthèse de documents",
+    "Structuration de dossiers",
+    "Réponses à appels à projets",
+    "Supports pédagogiques",
+    "Aide à la décision",
+    "Automatisation de tâches",
+  ],
+
   engagements: {
-    intro: "En parallèle de mon activité professionnelle, je m'implique dans des structures associatives qui renforcent mon engagement territorial, ma capacité de gestion et mon sens des responsabilités.",
+    intro: "En parallèle de mon activité professionnelle, je m'implique dans deux structures associatives à La Réunion.",
     items: [
       {
         org: "Maison de l'Europe Océan Indien",
         role: "Trésorier",
         bigWord: "Gouvernance",
-        text: "Participation à la gouvernance associative et au suivi financier d'une structure tournée vers l'Europe, la coopération et l'ouverture régionale dans l'océan Indien.",
+        text: "Gouvernance associative et suivi financier d'une structure tournée vers l'Europe et l'océan Indien.",
         tags: ["Trésorerie", "Gouvernance"],
       },
       {
         org: "Réunion Prévention Moto",
         role: "Président",
         bigWord: "Prévention",
-        text: "Pilotage d'une association engagée dans la prévention moto, la sensibilisation et la responsabilisation des usagers de deux-roues à La Réunion.",
+        text: "Pilotage d'une association de prévention et de sensibilisation des usagers de deux-roues.",
         tags: ["Présidence", "Prévention"],
       },
     ],

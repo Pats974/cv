@@ -137,6 +137,11 @@
     aiStepEls.push(item);
   });
 
+  var aiExamples = document.getElementById("aiExamples");
+  if (aiExamples && d.aiExamples) {
+    aiExamples.textContent = "Quelques usages concrets : " + d.aiExamples.join(" · ") + ".";
+  }
+
   /* ---------------- Engagements associatifs ---------------- */
   document.getElementById("engagementsIntro").textContent = d.engagements.intro;
   var engagementsGrid = document.getElementById("engagementsGrid");

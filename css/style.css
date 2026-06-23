@@ -737,6 +737,16 @@ h1, h2, h3 {
   margin: 0;
 }
 
+.ai-examples {
+  position: relative;
+  margin: 56px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  max-width: 70ch;
+}
+
 /* =========================================================
    Engagements associatifs — grands blocs
    ========================================================= */
@@ -759,6 +769,17 @@ h1, h2, h3 {
   flex-direction: column;
   justify-content: flex-end;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.engagement-grid--compact {
+  max-width: 880px;
+}
+.engagement-grid--compact .engagement-card {
+  padding: 28px 28px;
+  min-height: 0;
+}
+.engagement-grid--compact .engagement-content p {
+  margin: 0 0 12px;
 }
 .engagement-card:hover {
   transform: translateY(-4px);

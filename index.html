@@ -32,14 +32,9 @@
 
       <nav class="primary-nav" id="primaryNav" aria-label="Navigation principale">
         <ul>
-          <li><a href="#accueil" data-nav>Accueil</a></li>
-          <li><a href="#apropos" data-nav>À propos</a></li>
-          <li><a href="#territoires" data-nav>Territoires</a></li>
+          <li><a href="#accueil" data-nav>Profil</a></li>
           <li><a href="#experience" data-nav>Expérience</a></li>
-          <li><a href="#ia-generative" data-nav>IA générative</a></li>
-          <li><a href="#engagements" data-nav>Engagements</a></li>
-          <li><a href="#competences" data-nav>Compétences</a></li>
-          <li><a href="#formations" data-nav>Formations</a></li>
+          <li><a href="#ia-generative" data-nav>IA & projets</a></li>
           <li><a href="#contact" data-nav>Contact</a></li>
         </ul>
       </nav>
@@ -85,11 +80,11 @@
       </div>
     </section>
 
-    <!-- TERRITOIRES -->
-    <section id="territoires" class="section section-alt section-territories">
+    <!-- CE QUE J'APPORTE (4 piliers) -->
+    <section id="apporte" class="section section-alt section-territories">
       <div class="container">
-        <p class="eyebrow reveal">Domaines d'action</p>
-        <h2 class="section-title reveal">Cinq territoires, un seul profil</h2>
+        <p class="eyebrow reveal">L'essentiel</p>
+        <h2 class="section-title reveal">Ce que j'apporte</h2>
       </div>
       <div id="territoryList"></div>
     </section>
@@ -114,31 +109,13 @@
         <p class="eyebrow reveal">Méthode</p>
         <h2 class="section-title reveal">L'IA générative comme méthode de travail</h2>
         <p class="section-lead reveal">
-          L'IA générative n'est pas un mot-clé pour moi : c'est une méthode en quatre temps
-          que j'applique chaque jour pour gagner en rigueur, en clarté et en rapidité.
+          Clarifier → Structurer → Produire → Améliorer : une méthode simple,
+          appliquée chaque jour à des cas concrets.
         </p>
         <div class="ai-steps" id="aiSteps">
           <div class="ai-steps-line" aria-hidden="true"><span class="ai-steps-progress" id="aiStepsProgress"></span></div>
         </div>
-      </div>
-    </section>
-
-    <!-- ENGAGEMENTS ASSOCIATIFS -->
-    <section id="engagements" class="section">
-      <div class="container">
-        <p class="eyebrow reveal">Engagement local</p>
-        <h2 class="section-title reveal">Engagements associatifs</h2>
-        <p class="section-lead reveal" id="engagementsIntro"></p>
-        <div class="engagement-grid" id="engagementsGrid"></div>
-      </div>
-    </section>
-
-    <!-- COMPETENCES -->
-    <section id="competences" class="section section-alt section-compact">
-      <div class="container">
-        <p class="eyebrow reveal">Boîte à outils</p>
-        <h2 class="section-title reveal">Compétences & outils</h2>
-        <div class="skills-compact reveal" id="skillsCompact"></div>
+        <p class="ai-examples reveal" id="aiExamples"></p>
       </div>
     </section>
 
@@ -159,6 +136,25 @@
             <ul class="clean-list" id="languagesList"></ul>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- COMPETENCES -->
+    <section id="competences" class="section section-alt section-compact">
+      <div class="container">
+        <p class="eyebrow reveal">Boîte à outils</p>
+        <h2 class="section-title reveal">Compétences & outils</h2>
+        <div class="skills-compact reveal" id="skillsCompact"></div>
+      </div>
+    </section>
+
+    <!-- ENGAGEMENTS ASSOCIATIFS -->
+    <section id="engagements" class="section section-compact">
+      <div class="container">
+        <p class="eyebrow reveal">Engagement local</p>
+        <h2 class="section-title reveal">Engagements associatifs</h2>
+        <p class="section-lead reveal" id="engagementsIntro"></p>
+        <div class="engagement-grid engagement-grid--compact" id="engagementsGrid"></div>
       </div>
     </section>
 
