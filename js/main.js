@@ -15,25 +15,16 @@
   document.getElementById("heroName").textContent = d.hero.name;
   document.getElementById("heroRole").textContent = d.hero.role;
   document.getElementById("heroTagline").textContent = d.hero.tagline;
+  document.getElementById("heroSecondary").textContent = d.hero.secondaryLine;
   document.getElementById("heroPhotoLink").href = d.contact.photoPortfolio;
   var heroVolcanoImg = document.getElementById("heroVolcanoImg");
   heroVolcanoImg.src = d.hero.volcanoImage;
   heroVolcanoImg.alt = "Coulée de lave volcanique à La Réunion, en arrière-plan atténué";
 
-  /* ---------------- About (éditorial) ---------------- */
-  document.getElementById("aboutKicker").textContent = d.about.kicker;
-  document.getElementById("aboutLead").textContent = d.about.lead;
-  var aboutText = document.getElementById("aboutText");
-  d.about.paragraphs.forEach(function (p) {
-    var para = el("p");
-    para.textContent = p;
-    aboutText.appendChild(para);
-  });
-
-  /* ---------------- Territoires ---------------- */
+  /* ---------------- Territoires : "Ce que j'apporte" ---------------- */
   var territoryList = document.getElementById("territoryList");
   d.territories.forEach(function (t) {
-    var article = el("article", "territory reveal");
+    var article = el("article", "territory reveal" + (t.accent ? " territory--accent" : ""));
     article.id = "territoire-" + t.id;
 
     var inner = el("div", "territory-inner");
@@ -60,7 +51,23 @@
     territoryList.appendChild(article);
   });
 
-  /* ---------------- Experience sticky summary ---------------- */
+  /* ---------------- Profil hybride ---------------- */
+  document.getElementById("hybridEyebrow").textContent = d.hybridProfile.eyebrow;
+  document.getElementById("hybridTitle").textContent = d.hybridProfile.title;
+  var hybridText = document.getElementById("hybridText");
+  d.hybridProfile.paragraphs.forEach(function (p) {
+    var para = el("p");
+    para.textContent = p;
+    hybridText.appendChild(para);
+  });
+  var hybridBg = document.getElementById("hybridBg");
+  d.hybridProfile.backgroundWords.forEach(function (word) {
+    var span = el("span");
+    span.textContent = word;
+    hybridBg.appendChild(span);
+  });
+
+  /* ---------------- Parcours : panneau sticky ---------------- */
   document.getElementById("experiencePeriod").textContent = d.experienceSummary.period;
   var experienceHighlights = document.getElementById("experienceHighlights");
   d.experienceSummary.highlights.forEach(function (h) {
@@ -69,7 +76,7 @@
     experienceHighlights.appendChild(li);
   });
 
-  /* ---------------- Experience timeline ---------------- */
+  /* ---------------- Parcours : timeline ---------------- */
   var timeline = document.getElementById("timeline");
   d.experiences.forEach(function (exp) {
     var li = el("li", "timeline-item reveal" + (exp.current ? " is-current" : ""));
@@ -81,7 +88,7 @@
     h3.textContent = exp.role;
 
     var org = el("p", "timeline-org");
-    org.textContent = exp.org;
+    org.textContent = exp.org + (exp.proves ? " — " + exp.proves : "");
 
     var ul = el("ul");
     exp.points.forEach(function (point) {
@@ -107,10 +114,14 @@
     timeline.appendChild(li);
   });
 
-  /* ---------------- IA générative : étapes ---------------- */
+  /* ---------------- IA & création : méthode ---------------- */
+  document.getElementById("aiEyebrow").textContent = d.aiCreation.eyebrow;
+  document.getElementById("aiTitle").textContent = d.aiCreation.title;
+  document.getElementById("aiSubtitle").textContent = d.aiCreation.subtitle;
+
   var aiSteps = document.getElementById("aiSteps");
   var aiStepEls = [];
-  d.aiSteps.forEach(function (step) {
+  d.aiCreation.steps.forEach(function (step) {
     var item = el("div", "ai-step");
 
     var number = el("span", "ai-step-number");
@@ -130,54 +141,44 @@
   });
 
   var aiExamples = document.getElementById("aiExamples");
-  if (aiExamples && d.aiExamples) {
-    aiExamples.textContent = "Exemples concrets : " + d.aiExamples.join(" · ") + ".";
+  if (aiExamples && d.aiCreation.examples) {
+    aiExamples.textContent = "Exemples concrets : " + d.aiCreation.examples.join(" · ") + ".";
   }
 
-  /* ---------------- Engagements associatifs ---------------- */
+  /* ---------------- IA & création : bloc créatif ---------------- */
+  var creativeBlock = document.getElementById("creativeBlock");
+  var creative = d.aiCreation.creative;
+  var creativeH3 = el("h3");
+  creativeH3.textContent = creative.title;
+  var creativeP = el("p");
+  creativeP.textContent = creative.text;
+  var creativeA = el("a");
+  creativeA.href = creative.linkUrl;
+  creativeA.target = "_blank";
+  creativeA.rel = "noopener";
+  creativeA.textContent = creative.linkLabel + " ↗";
+  creativeBlock.appendChild(creativeH3);
+  creativeBlock.appendChild(creativeP);
+  creativeBlock.appendChild(creativeA);
+
+  /* ---------------- Section finale : Engagements ---------------- */
   document.getElementById("engagementsIntro").textContent = d.engagements.intro;
-  var engagementsGrid = document.getElementById("engagementsGrid");
+  var engagementsList = document.getElementById("engagementsList");
   d.engagements.items.forEach(function (item) {
-    var card = el("article", "engagement-card reveal");
-
-    var bigWord = el("span", "engagement-bigword");
-    bigWord.setAttribute("aria-hidden", "true");
-    bigWord.textContent = item.bigWord;
-
-    var content = el("div", "engagement-content");
+    var article = el("article", "engagement-item");
     var h3 = el("h3");
     h3.textContent = item.org;
     var role = el("p", "card-role");
     role.textContent = item.role;
     var p = el("p");
     p.textContent = item.text;
-    var tags = el("p", "engagement-tags");
-    tags.textContent = item.tags.join(" · ");
-
-    content.appendChild(h3);
-    content.appendChild(role);
-    content.appendChild(p);
-    content.appendChild(tags);
-
-    card.appendChild(bigWord);
-    card.appendChild(content);
-    engagementsGrid.appendChild(card);
+    article.appendChild(h3);
+    article.appendChild(role);
+    article.appendChild(p);
+    engagementsList.appendChild(article);
   });
 
-  /* ---------------- Compétences & outils (compact) ---------------- */
-  var skillsCompact = document.getElementById("skillsCompact");
-  d.skills.categories.forEach(function (cat) {
-    var row = el("div", "skills-row");
-    var label = el("span", "skills-row-label");
-    label.textContent = cat.name;
-    var items = el("span", "skills-row-items");
-    items.textContent = cat.items.join(" · ");
-    row.appendChild(label);
-    row.appendChild(items);
-    skillsCompact.appendChild(row);
-  });
-
-  /* ---------------- Formations ---------------- */
+  /* ---------------- Section finale : Formations ---------------- */
   var formationsList = document.getElementById("formationsList");
   d.formations.forEach(function (f) {
     var li = el("li");
@@ -190,7 +191,7 @@
     formationsList.appendChild(li);
   });
 
-  /* ---------------- Certifications ---------------- */
+  /* ---------------- Section finale : Certifications ---------------- */
   var certificationsList = document.getElementById("certificationsList");
   d.certifications.forEach(function (c) {
     var li = el("li");
@@ -205,20 +206,7 @@
     certificationsList.appendChild(li);
   });
 
-  /* ---------------- Languages ---------------- */
-  var languagesList = document.getElementById("languagesList");
-  d.languages.forEach(function (lang) {
-    var li = el("li");
-    var title = el("p", "item-title");
-    title.textContent = lang.name;
-    var meta = el("p", "item-meta");
-    meta.textContent = lang.level;
-    li.appendChild(title);
-    li.appendChild(meta);
-    languagesList.appendChild(li);
-  });
-
-  /* ---------------- Contact ---------------- */
+  /* ---------------- Section finale : Contact ---------------- */
   var contactList = document.getElementById("contactList");
 
   function addContactLine(text) {
@@ -249,7 +237,6 @@
   contactList.appendChild(linkedinLi);
 
   document.getElementById("contactEmailBtn").href = "mailto:" + d.contact.email;
-  document.getElementById("contactPhotoBtn").href = d.contact.photoPortfolio;
 
   if (d.contact.cvAvailable) {
     var cvBtn = document.getElementById("cvDownloadBtn");
@@ -257,12 +244,19 @@
     cvBtn.hidden = false;
   }
 
-  var interestsLine = document.getElementById("interestsLine");
-  interestsLine.textContent = d.interests.join(" · ");
-
-  /* ---------------- Footer ---------------- */
+  /* ---------------- Footer : outils (bloc compact) ---------------- */
   document.getElementById("year").textContent = new Date().getFullYear();
   document.getElementById("footerCity").textContent = d.contact.city;
+
+  var footerTools = document.getElementById("footerTools");
+  d.tools.forEach(function (tool) {
+    var span = el("span");
+    var strong = el("strong");
+    strong.textContent = tool.name + " : ";
+    span.appendChild(strong);
+    span.appendChild(document.createTextNode(tool.items));
+    footerTools.appendChild(span);
+  });
 
   /* ---------------- Mobile nav ---------------- */
   var navToggle = document.getElementById("navToggle");
@@ -326,10 +320,10 @@
   /* ---------------- Parallax très lent sur la photo volcan ---------------- */
   if (!prefersReducedMotion) {
     var heroSection = document.getElementById("accueil");
-    var ticking = false;
+    var tickingParallax = false;
 
     function updateParallax() {
-      ticking = false;
+      tickingParallax = false;
       var rect = heroSection.getBoundingClientRect();
       if (rect.bottom < 0 || rect.top > window.innerHeight) return;
       var offset = rect.top * -0.08;
@@ -339,8 +333,8 @@
     window.addEventListener(
       "scroll",
       function () {
-        if (!ticking) {
-          ticking = true;
+        if (!tickingParallax) {
+          tickingParallax = true;
           requestAnimationFrame(updateParallax);
         }
       },
@@ -349,7 +343,7 @@
     updateParallax();
   }
 
-  /* ---------------- Progression de la chaîne IA au scroll ---------------- */
+  /* ---------------- Progression de la méthode IA au scroll ---------------- */
   (function aiStepsProgress() {
     var wrapper = document.getElementById("aiSteps");
     var progress = document.getElementById("aiStepsProgress");

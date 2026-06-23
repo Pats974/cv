@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Patrice FONTAINE — Direction pédagogique, ingénierie de formation & IA générative</title>
-  <meta name="description" content="Patrice FONTAINE — Directeur adjoint et directeur pédagogique. Ingénierie de formation, coordination de projets, appels à projets, Qualiopi et usage avancé de l'IA générative." />
+  <title>Patrice FONTAINE — Directeur pédagogique, créateur visuel & IA générative</title>
+  <meta name="description" content="Patrice FONTAINE — Directeur adjoint, directeur pédagogique. Pilotage de projets, ingénierie de formation, IA générative et création visuelle, ancré à La Réunion." />
   <meta name="author" content="Patrice FONTAINE" />
   <meta name="color-scheme" content="light" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Patrice FONTAINE — Direction pédagogique & IA générative" />
-  <meta property="og:description" content="Direction opérationnelle, ingénierie de formation, appels à projets, Qualiopi et IA générative au service de projets qui avancent." />
+  <meta property="og:title" content="Patrice FONTAINE — Direction, IA générative & création visuelle" />
+  <meta property="og:description" content="Je structure les projets, accompagne les équipes et transforme les idées en actions concrètes. Entre pilotage, formation, IA et création visuelle." />
   <meta property="og:locale" content="fr_FR" />
   <!-- Ajoute une image puis décommente la ligne ci-dessous -->
   <!-- <meta property="og:image" content="assets/og-image.png" /> -->
@@ -32,9 +32,10 @@
 
       <nav class="primary-nav" id="primaryNav" aria-label="Navigation principale">
         <ul>
-          <li><a href="#accueil" data-nav>Profil</a></li>
-          <li><a href="#experience" data-nav>Expérience</a></li>
-          <li><a href="#ia-generative" data-nav>IA & projets</a></li>
+          <li><a href="#accueil" data-nav>Accueil</a></li>
+          <li><a href="#profil" data-nav>Profil</a></li>
+          <li><a href="#parcours" data-nav>Parcours</a></li>
+          <li><a href="#ia-creation" data-nav>IA & création</a></li>
           <li><a href="#contact" data-nav>Contact</a></li>
         </ul>
       </nav>
@@ -42,7 +43,7 @@
   </header>
 
   <main id="main">
-    <!-- HERO -->
+    <!-- 1. HERO -->
     <section id="accueil" class="hero">
       <div class="hero-bg" aria-hidden="true">
         <img id="heroVolcanoImg" class="hero-bg-img" src="" alt="" />
@@ -52,12 +53,13 @@
 
       <div class="container hero-inner">
         <div class="hero-content reveal">
-          <p class="eyebrow">Profil hybride · Direction & numérique</p>
+          <p class="eyebrow">La Réunion · Direction & création</p>
           <h1 id="heroName"></h1>
           <p class="hero-role" id="heroRole"></p>
           <p class="hero-tagline" id="heroTagline"></p>
+          <p class="hero-secondary" id="heroSecondary"></p>
           <div class="hero-actions">
-            <a href="#experience" class="btn btn-primary">Voir mon parcours</a>
+            <a href="#parcours" class="btn btn-primary">Voir mon parcours</a>
             <a href="#contact" class="btn btn-secondary">Me contacter</a>
             <a id="heroPhotoLink" href="#" target="_blank" rel="noopener" class="btn btn-ghost">Portfolio photo ↗</a>
           </div>
@@ -65,18 +67,7 @@
       </div>
     </section>
 
-    <!-- A PROPOS — section éditoriale -->
-    <section id="apropos" class="section section-editorial">
-      <div class="container editorial-grid">
-        <div class="editorial-kicker reveal">
-          <p class="eyebrow" id="aboutKicker"></p>
-          <p class="editorial-lead" id="aboutLead"></p>
-        </div>
-        <div class="editorial-body" id="aboutText"></div>
-      </div>
-    </section>
-
-    <!-- CE QUE J'APPORTE (4 piliers) -->
+    <!-- 2. CE QUE J'APPORTE (4 piliers) -->
     <section id="apporte" class="section section-alt section-territories">
       <div class="container">
         <p class="eyebrow reveal">L'essentiel</p>
@@ -85,8 +76,18 @@
       <div id="territoryList"></div>
     </section>
 
-    <!-- EXPERIENCE -->
-    <section id="experience" class="section">
+    <!-- 3. PROFIL HYBRIDE -->
+    <section id="profil" class="section section-hybrid">
+      <div class="hybrid-bg" id="hybridBg" aria-hidden="true"></div>
+      <div class="container hybrid-inner">
+        <p class="eyebrow reveal" id="hybridEyebrow"></p>
+        <h2 class="section-title reveal" id="hybridTitle"></h2>
+        <div class="hybrid-text" id="hybridText"></div>
+      </div>
+    </section>
+
+    <!-- 4. PARCOURS -->
+    <section id="parcours" class="section">
       <div class="container experience-layout">
         <div class="experience-sticky reveal">
           <p class="eyebrow">Parcours</p>
@@ -98,86 +99,61 @@
       </div>
     </section>
 
-    <!-- IA GENERATIVE -->
-    <section id="ia-generative" class="section section-alt section-ai">
+    <!-- 5. IA & CREATION -->
+    <section id="ia-creation" class="section section-alt section-ai">
       <div class="ai-steps-bg" aria-hidden="true"></div>
       <div class="container">
-        <p class="eyebrow reveal">Méthode</p>
-        <h2 class="section-title reveal">L'IA générative comme méthode de travail</h2>
-        <p class="section-lead reveal">
-          Clarifier → Structurer → Produire → Améliorer : une méthode simple,
-          appliquée chaque jour à des cas concrets.
-        </p>
+        <p class="eyebrow reveal" id="aiEyebrow"></p>
+        <h2 class="section-title reveal" id="aiTitle"></h2>
+        <p class="section-lead reveal" id="aiSubtitle"></p>
         <div class="ai-steps" id="aiSteps">
           <div class="ai-steps-line" aria-hidden="true"><span class="ai-steps-progress" id="aiStepsProgress"></span></div>
         </div>
         <p class="ai-examples reveal" id="aiExamples"></p>
+
+        <div class="creative-block reveal" id="creativeBlock"></div>
       </div>
     </section>
 
-    <!-- FORMATIONS -->
-    <section id="formations" class="section">
-      <div class="container">
-        <p class="eyebrow reveal">Parcours académique</p>
-        <h2 class="section-title reveal">Formations & certifications</h2>
-        <div class="two-col">
-          <div class="reveal">
-            <h3 class="subsection-title">Formations</h3>
-            <ul class="clean-list" id="formationsList"></ul>
-          </div>
-          <div class="reveal">
-            <h3 class="subsection-title">Certifications</h3>
-            <ul class="clean-list" id="certificationsList"></ul>
-            <h3 class="subsection-title">Langues</h3>
-            <ul class="clean-list" id="languagesList"></ul>
-          </div>
+    <!-- 6. ENGAGEMENTS, FORMATIONS & CONTACT -->
+    <section id="final" class="section section-final">
+      <div class="container final-grid">
+        <div class="final-block reveal">
+          <p class="eyebrow">Engagement local</p>
+          <h2 class="subsection-title-lg">Engagements</h2>
+          <p class="final-lead" id="engagementsIntro"></p>
+          <div id="engagementsList"></div>
         </div>
-      </div>
-    </section>
 
-    <!-- COMPETENCES -->
-    <section id="competences" class="section section-alt section-compact">
-      <div class="container">
-        <p class="eyebrow reveal">Boîte à outils</p>
-        <h2 class="section-title reveal">Compétences & outils</h2>
-        <div class="skills-compact reveal" id="skillsCompact"></div>
-      </div>
-    </section>
+        <div class="final-block reveal">
+          <p class="eyebrow">Parcours académique</p>
+          <h2 class="subsection-title-lg">Formations</h2>
+          <ul class="clean-list clean-list--compact" id="formationsList"></ul>
+          <p class="subsection-title-sm">Certifications</p>
+          <ul class="clean-list clean-list--compact" id="certificationsList"></ul>
+        </div>
 
-    <!-- ENGAGEMENTS ASSOCIATIFS -->
-    <section id="engagements" class="section section-compact">
-      <div class="container">
-        <p class="eyebrow reveal">Engagement local</p>
-        <h2 class="section-title reveal">Engagements associatifs</h2>
-        <p class="section-lead reveal" id="engagementsIntro"></p>
-        <div class="engagement-grid engagement-grid--compact" id="engagementsGrid"></div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="section section-alt section-contact">
-      <div class="container">
-        <p class="eyebrow reveal">Contact</p>
-        <h2 class="section-title reveal">Échanger sur un projet, une mission ou une collaboration</h2>
-        <div class="contact-grid reveal">
+        <div class="final-block reveal" id="contact">
+          <p class="eyebrow">Contact</p>
+          <h2 class="subsection-title-lg">Échanger</h2>
+          <p class="final-lead">Échanger sur un projet, une mission ou une collaboration.</p>
           <ul class="contact-list" id="contactList"></ul>
           <div class="contact-cta">
             <a id="contactEmailBtn" class="btn btn-primary" href="#">Écrire un email</a>
             <a id="cvDownloadBtn" class="btn btn-secondary" href="#" hidden>Télécharger le CV</a>
-            <a id="contactPhotoBtn" class="btn btn-ghost" href="#" target="_blank" rel="noopener">Portfolio photo ↗</a>
           </div>
         </div>
-        <p class="interests-line">
-          <span>Centres d'intérêt :</span> <span id="interestsLine"></span>
-        </p>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© <span id="year"></span> Patrice FONTAINE</p>
-      <p id="footerCity"></p>
+    <div class="container">
+      <div class="footer-tools" id="footerTools"></div>
+      <div class="footer-inner">
+        <p>© <span id="year"></span> Patrice FONTAINE</p>
+        <p id="footerCity"></p>
+      </div>
     </div>
   </footer>
 

@@ -67,26 +67,41 @@ particulière :
 - **Vercel** : importer le dépôt, framework "Other", pas de commande de
   build, dossier de sortie `/`.
 
+## Structure du site (6 sections, nav à 5 entrées)
+
+1. **Hero** (`#accueil`) — nom, titre, accroche, ligne secondaire, photo volcan.
+2. **Ce que j'apporte** (`#apporte`) — 4 grands blocs (Piloter, Former,
+   Structurer, Créer avec l'IA). Le 4e a un traitement couleur pleine pour
+   casser la répétition.
+3. **Profil hybride** (`#profil`) — 2 paragraphes courts + grands mots en
+   fond (décoratifs).
+4. **Parcours** (`#parcours`) — panneau sticky + timeline condensée.
+5. **IA & création** (`#ia-creation`) — méthode en 4 étapes avec ligne de
+   progression au scroll, exemples concrets, bloc création visuelle +
+   lien portfolio photo.
+6. **Section finale** (`#final`, ancre `#contact` sur le bloc contact) —
+   3 blocs compacts : Engagements, Formations & certifications, Contact.
+
 ## Modifier le contenu
 
 Tout le contenu modifiable se trouve dans [`js/data.js`](js/data.js) :
 
 - `contact` — ville, email, lien portfolio photo, LinkedIn (à compléter),
   CV téléchargeable.
-- `hero` — nom, titre, phrase d'accroche, photo volcan.
-- `about` — accroche éditoriale + paragraphes de présentation.
-- `territories` — les 5 grands territoires d'action (Piloter, Former,
-  Structurer, Augmenter avec l'IA, S'engager) : titre, phrase, 3 mots-clés
-  maximum. Remplace l'ancienne grille de petites cartes.
-- `experiences` / `experienceSummary` — timeline du parcours professionnel
-  et résumé affiché dans le panneau sticky à gauche sur desktop.
-- `aiSteps` — la méthode de travail avec l'IA générative en 4 étapes
-  (Clarifier, Structurer, Produire, Améliorer), avec exemple concret.
-- `engagements` — intro + 2 grandes cartes (mot-clé en grand fond, peu de
-  badges).
-- `skills` — compétences par catégorie, affichées en lignes compactes
-  (pas de mur de badges).
-- `formations` / `certifications` / `languages` / `interests`.
+- `hero` — nom, titre, accroche, ligne secondaire, photo volcan.
+- `territories` — les 4 blocs de "Ce que j'apporte" (titre, phrase, 3
+  mots-clés maximum). `accent: true` sur un bloc lui donne le traitement
+  couleur pleine.
+- `hybridProfile` — la section "Profil hybride" (2 paragraphes max + mots
+  de fond décoratifs).
+- `experiences` / `experienceSummary` — parcours condensé et résumé affiché
+  dans le panneau sticky à gauche sur desktop.
+- `aiCreation` — méthode IA en 4 étapes, exemples concrets, et bloc
+  "Création visuelle & photographie" avec lien vers le portfolio photo.
+- `engagements` — intro courte + 2 engagements associatifs (sans badges).
+- `tools` — bloc compact affiché dans le pied de page (pas de section
+  dédiée, pas de mur de badges).
+- `formations` / `certifications` / `interests`.
 
 ### Activer le téléchargement du CV
 
@@ -119,9 +134,8 @@ Pour l'activer un jour si nécessaire :
 - Parallax très lent sur la photo du hero (translation verticale légère,
   proportionnelle au scroll).
 - Ligne de progression + activation séquentielle des 4 étapes de la section
-  IA générative au scroll.
-- Micro-interactions au survol (territoires, cartes d'engagement, boutons).
-- Curseur de défilement animé en bas du hero.
+  IA & création au scroll.
+- Micro-interactions au survol (territoires, boutons, liens).
 - Tout est CSS/SVG/JS natif, aucune librairie d'animation ajoutée.
 - `@media (prefers-reduced-motion: reduce)` (en haut de `css/style.css`)
   réduit la durée de toutes les animations/transitions à quasi zéro pour les

@@ -25,129 +25,134 @@ const SITE_DATA = {
 
   hero: {
     name: "Patrice FONTAINE",
-    role: "Directeur adjoint · Directeur pédagogique · Ingénierie de formation & IA générative",
+    role: "Directeur adjoint | Directeur pédagogique | Créateur visuel & IA générative",
     tagline: "Je structure les projets, accompagne les équipes et transforme les idées en actions concrètes.",
+    secondaryLine: "Entre pilotage, formation, IA et création visuelle.",
     // Photo signature : coulée de lave (énergie, ancrage local, force tranquille).
     volcanoImage: "assets/images/volcan-02.jpg",
   },
 
-  about: {
-    kicker: "Un profil hybride",
-    lead: "Je structure des projets, j'accompagne des équipes et je transforme les idées en actions concrètes.",
-    paragraphs: [
-      "Depuis 2018, je pilote au sein d'Emergence OI des missions qui mêlent direction opérationnelle, ingénierie de formation et coordination de projets — du suivi quotidien des équipes jusqu'aux dossiers stratégiques déposés auprès des financeurs. Un parcours construit par étapes : développement web, gestion de chantier dans le BTP, puis direction pédagogique et gestion de projet.",
-    ],
-  },
-
-  // Quatre grands piliers — "Ce que j'apporte". Chaque bloc reste sobre :
-  // un titre, une phrase, 3 mots-clés maximum. L'engagement associatif a
-  // sa propre section plus bas, pour ne pas alourdir ce bloc.
+  // "Ce que j'apporte" — 4 grands blocs, pas une liste de compétences.
+  // Le 4e bloc (id "creer") reçoit un traitement visuel distinct (couleur
+  // pleine) pour casser la répétition et mettre l'IA en avant.
   territories: [
     {
       id: "piloter",
       number: "01",
       title: "Piloter",
-      text: "Je coordonne les équipes, les plannings et un portefeuille de projets, en gardant le cap sur les délais, les budgets et les priorités.",
-      keywords: ["Coordination", "Budgets", "Priorités"],
+      text: "Coordination des équipes, des priorités et des budgets, du cadrage jusqu'à la livraison.",
+      keywords: ["Coordination", "Budgets", "Livrables"],
     },
     {
       id: "former",
       number: "02",
       title: "Former",
-      text: "Je conçois des parcours pédagogiques, j'outille les équipes et je pilote la démarche Qualiopi au quotidien.",
-      keywords: ["Ingénierie pédagogique", "Qualiopi", "Certifications"],
+      text: "Ingénierie pédagogique, conception de parcours, évaluations et démarche Qualiopi.",
+      keywords: ["Ingénierie pédagogique", "Parcours", "Qualiopi"],
     },
     {
       id: "structurer",
       number: "03",
       title: "Structurer",
-      text: "Je monte des dossiers, je réponds aux appels à projets et je formalise les méthodes qui font gagner du temps à l'équipe.",
+      text: "Appels à projets, dossiers, bilans : je formalise les méthodes qui font gagner du temps.",
       keywords: ["Appels à projets", "Dossiers", "Méthodes"],
     },
     {
-      id: "augmenter",
+      id: "creer",
       number: "04",
-      title: "Augmenter avec l'IA",
-      text: "J'intègre l'IA générative à mon travail quotidien : rédaction, synthèse, automatisation, aide à la décision.",
-      keywords: ["IA générative", "Automatisation", "Décision"],
+      title: "Créer avec l'IA",
+      text: "Synthèse, rédaction, automatisation, supports et visuels — l'IA comme outil de production.",
+      keywords: ["Synthèse", "Automatisation", "Visuels"],
+      accent: true,
     },
   ],
 
+  // Section courte "Profil hybride" — 2 paragraphes maximum + grands mots
+  // en arrière-plan (purement décoratifs, aria-hidden).
+  hybridProfile: {
+    eyebrow: "Profil hybride",
+    title: "Un profil qui ne rentre pas dans une seule case",
+    paragraphs: [
+      "Mon parcours relie la formation, le numérique, la coordination de projets et la création visuelle.",
+      "J'utilise l'IA générative comme un outil de structuration, de production et d'aide à la décision, sans perdre le sens du terrain et de l'humain.",
+    ],
+    backgroundWords: ["Direction", "Formation", "IA", "Projet", "Image", "Territoire"],
+  },
+
+  // Parcours condensé : 2 à 4 lignes par expérience, et ce que ça prouve.
   experiences: [
     {
       role: "Directeur adjoint / Directeur pédagogique",
       org: "Emergence OI",
       period: "2018 — aujourd'hui",
-      tag: "Direction & IA générative",
       current: true,
       points: [
-        "Coordination des équipes, des plannings et d'un portefeuille de projets variés.",
-        "Pilotage des délais, budgets, livrables, bilans d'activité et justificatifs financeurs.",
-        "Réponses aux appels à projets, ingénierie de formation et suivi Qualiopi.",
-        "Intégration de l'IA générative dans les pratiques quotidiennes de l'équipe.",
+        "Coordination d'équipes et d'un portefeuille de projets, du budget au bilan.",
+        "Ingénierie de formation, suivi Qualiopi et appels à projets.",
+        "IA générative intégrée aux pratiques quotidiennes de l'équipe.",
       ],
+      proves: "Pilotage & responsabilité",
     },
     {
       role: "Développeur intégrateur web",
       org: "Emergence OI",
       period: "2018",
-      tag: "Développement web",
       current: false,
-      points: [
-        "Réalisation de sites web vitrines pour différentes structures.",
-        "Intégration HTML/CSS et premières expériences concrètes en développement web.",
-      ],
+      points: ["Sites web vitrines pour différentes structures, en HTML/CSS."],
+      proves: "Numérique",
     },
     {
       role: "Responsable de chantier",
       org: "SARL BTPOI",
       period: "2014 — 2017",
-      tag: "BTP",
       current: false,
-      points: [
-        "Élaboration de devis, facturation et métrés.",
-        "Réponses aux appels d'offres, visites, implantation, suivi et réception de chantiers.",
-      ],
+      points: ["Devis, facturation, métrés, appels d'offres, suivi et réception de chantiers."],
+      proves: "Terrain & gestion",
     },
     {
       role: "Photographie & création visuelle",
       org: "Micro-entreprise — activité complémentaire",
       period: "En continu",
-      tag: "Création visuelle",
       current: false,
-      points: [
-        "Photographie professionnelle et retouche.",
-        "Création de contenus photo/vidéo pour des supports de communication.",
-      ],
-      link: {
-        label: "Voir le portfolio photo",
-        url: "https://patrice-photo.netlify.app/",
-      },
+      points: ["Photographie professionnelle, retouche et contenus pour supports de communication."],
+      proves: "Création",
+      link: { label: "Voir le portfolio photo", url: "https://patrice-photo.netlify.app/" },
     },
   ],
 
-  // Sticky panel affiché à gauche de la section Expérience sur desktop.
+  // Sticky panel affiché à gauche de la section Parcours sur desktop.
   experienceSummary: {
     period: "2018 — aujourd'hui",
     highlights: ["Direction pédagogique", "Coordination", "IA générative"],
   },
 
-  // Méthode de travail avec l'IA générative, présentée en 4 étapes simples.
-  aiSteps: [
-    { step: "01", title: "Clarifier", text: "Je formule clairement l'objectif et le contexte avant de solliciter l'IA." },
-    { step: "02", title: "Structurer", text: "Je structure l'information : plan, arguments, données à mobiliser." },
-    { step: "03", title: "Produire", text: "Je génère un premier jet rédactionnel ou visuel, rapidement exploitable." },
-    { step: "04", title: "Améliorer", text: "Je relis, corrige et affine pour garder rigueur et ton professionnel." },
-  ],
-
-  // Exemples très concrets, affichés en une ligne sobre sous les 4 étapes
-  // (pas de badges) pour ancrer la méthode dans des cas réels.
-  aiExamples: [
-    "Réponse à appel à projets",
-    "Synthèse de documents",
-    "Support pédagogique",
-    "Aide à la décision",
-  ],
+  // Section fusionnée "IA & création" : méthode + exemples + bloc créatif.
+  aiCreation: {
+    eyebrow: "Méthode",
+    title: "IA, image et méthode de travail",
+    subtitle: "J'utilise l'IA pour clarifier, structurer, produire et améliorer.",
+    steps: [
+      { step: "01", title: "Clarifier", text: "Je formule l'objectif et le contexte avant de solliciter l'IA." },
+      { step: "02", title: "Structurer", text: "Plan, arguments, données à mobiliser : je structure l'information." },
+      { step: "03", title: "Produire", text: "Un premier jet rédactionnel ou visuel, rapidement exploitable." },
+      { step: "04", title: "Améliorer", text: "Relecture, correction, ajustement du ton et de la rigueur." },
+    ],
+    examples: [
+      "Synthétiser un dossier",
+      "Préparer une réponse à appel à projets",
+      "Structurer un support pédagogique",
+      "Reformuler une note professionnelle",
+      "Créer une trame de suivi",
+      "Automatiser une tâche répétitive",
+      "Générer ou améliorer un visuel",
+    ],
+    creative: {
+      title: "Création visuelle & photographie",
+      text: "En parallèle de mon parcours professionnel, je développe une activité de photographie et de création visuelle. Cette pratique renforce mon regard sur l'image, la communication, la composition et la production de contenus.",
+      linkLabel: "Voir le portfolio photo",
+      linkUrl: "https://patrice-photo.netlify.app/",
+    },
+  },
 
   engagements: {
     intro: "En parallèle de mon activité professionnelle, je m'implique dans deux structures associatives à La Réunion.",
@@ -155,38 +160,22 @@ const SITE_DATA = {
       {
         org: "Maison de l'Europe Océan Indien",
         role: "Trésorier",
-        bigWord: "Gouvernance",
-        text: "Gouvernance associative et suivi financier d'une structure tournée vers l'Europe et l'océan Indien.",
-        tags: ["Trésorerie", "Gouvernance"],
+        text: "Participation à la gouvernance associative et au suivi financier d'une structure tournée vers l'Europe, la coopération et l'ouverture régionale dans l'océan Indien.",
       },
       {
         org: "Réunion Prévention Moto",
         role: "Président",
-        bigWord: "Prévention",
-        text: "Pilotage d'une association de prévention et de sensibilisation des usagers de deux-roues.",
-        tags: ["Présidence", "Prévention"],
+        text: "Pilotage d'une association engagée dans la prévention moto, la sensibilisation et la responsabilisation des usagers de deux-roues à La Réunion.",
       },
     ],
   },
 
-  skills: {
-    categories: [
-      { name: "Pilotage & coordination", items: ["Gestion d'équipes", "Planning", "Budgets"] },
-      { name: "Formation & pédagogie", items: ["Ingénierie de formation", "Qualiopi", "Pix & TOSA"] },
-      { name: "IA générative", items: ["ChatGPT", "Prompting", "Automatisation"] },
-      { name: "Numérique & web", items: ["HTML/CSS", "WordPress / CMS", "Inclusion numérique"] },
-      { name: "Création visuelle", items: ["Photoshop", "Illustrator", "Premiere Pro"] },
-      { name: "Bureautique & gestion", items: ["Excel", "Google Workspace", "Asana"] },
-    ],
-  },
-
   formations: [
-    { year: "2025", title: "Contribuer à la gestion d'entreprise", org: "CCI — Chambre de commerce et d'industrie" },
+    { year: "2025", title: "Contribuer à la gestion d'entreprise", org: "CCI" },
     { year: "2021", title: "CCP Formateur pour adulte", org: "Formalisa Institut" },
     { year: "2018", title: "Développeur intégrateur web", org: "Grande École du Numérique" },
     { year: "2014", title: "Responsable chantier travaux publics", org: "CCI" },
     { year: "2012", title: "BTS Systèmes constructifs bois et habitat", org: "Lycée Jean-Joly" },
-    { year: "2011", title: "Baccalauréat sciences et technologies industrielles", org: "Lycée Jean-Joly" },
   ],
 
   certifications: [
@@ -195,11 +184,17 @@ const SITE_DATA = {
     { name: "Certificat IA", detail: "" },
     { name: "Certification Photoshop", detail: "" },
     { name: "Qualification de juré — Certification IAG", detail: "" },
-    { name: "Formateur pour adultes", detail: "" },
-    { name: "Gestion d'entreprise", detail: "" },
   ],
 
-  languages: [{ name: "Anglais", level: "Notions de base" }],
+  // Bloc compact affiché dans le pied de page (pas de section dédiée,
+  // pas de mur de badges).
+  tools: [
+    { name: "Pilotage", items: "Asana, gestion de projet, coordination" },
+    { name: "Bureautique", items: "Google Workspace, Microsoft Office, Excel" },
+    { name: "IA", items: "ChatGPT, prompting, automatisation" },
+    { name: "Création", items: "Photoshop, Illustrator, Premiere Pro" },
+    { name: "Web", items: "HTML/CSS, WordPress" },
+  ],
 
   interests: ["Photographie", "Vidéo", "Moto", "Randonnée", "Jeux vidéo"],
 };
