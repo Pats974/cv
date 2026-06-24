@@ -48,8 +48,13 @@ html {
   }
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
+  overflow-x: hidden;
   font-family: var(--font-sans);
   color: var(--text);
   background: var(--bg);
@@ -257,22 +262,48 @@ h1, h2, h3 {
    ========================================================= */
 .hero {
   position: relative;
-  padding: 140px 0 100px;
+  min-height: 88vh;
+  display: flex;
   overflow: hidden;
 }
 
+/* Grille pleine largeur (pas de .container) : la photo va jusqu'au bord
+   droit de l'écran pour un effet grand fond immersif, tout en restant
+   une colonne de grille distincte du texte — aucun chevauchement
+   possible, à n'importe quelle largeur. .hero-inner s'étire sur toute
+   la hauteur du hero (stretch par défaut du flex parent), et sa seule
+   rangée de grille hérite donc de cette hauteur pleine. */
 .hero-inner {
   position: relative;
   z-index: 2;
+  width: 100%;
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  gap: 56px;
-  align-items: center;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 48px;
 }
 
 .hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   min-width: 0;
-  max-width: 56ch;
+  /* Pas de max-width ici : ce conteneur remplit toute la colonne de
+     grille. La largeur de lecture confortable est plafonnée sur
+     chaque enfant ci-dessous, pour ne pas cumuler avec le padding
+     d'alignement (sinon le texte se retrouve compressé sur grand écran). */
+  padding-left: max(24px, calc((100vw - var(--max-width)) / 2));
+  padding-right: 24px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+/* Largeur de lecture confortable, appliquée aux enfants (pas au
+   conteneur) pour ne pas se cumuler avec le padding d'alignement. */
+.hero-content h1,
+.hero-content .hero-role,
+.hero-content .hero-tagline,
+.hero-content .hero-secondary {
+  max-width: 42ch;
 }
 
 .eyebrow {
@@ -285,7 +316,7 @@ h1, h2, h3 {
 }
 
 .hero h1 {
-  font-size: clamp(2.4rem, 5.2vw, 4.6rem);
+  font-size: clamp(2.2rem, 3.6vw, 3.6rem);
   margin: 0 0 20px;
   overflow-wrap: break-word;
 }
@@ -317,45 +348,48 @@ h1, h2, h3 {
   gap: 14px;
 }
 
-/* Colonne visuelle : la photo reste strictement dans sa colonne,
-   jamais derrière ou sous le texte. */
+/* Colonne visuelle : grand fond photo qui va jusqu'au bord droit de
+   l'écran (pleine hauteur du hero). C'est toujours une colonne de
+   grille à part entière : le texte ne peut jamais passer dessus. */
 .hero-visual {
   position: relative;
   min-width: 0;
   width: 100%;
-  aspect-ratio: 4 / 5;
-  border-radius: 28px;
+  align-self: stretch;
   overflow: hidden;
-  box-shadow: var(--shadow);
-}
-
-/* Lueur chaude : positionnée derrière le visuel uniquement (légèrement
-   plus grande que le cadre), jamais étendue sur la colonne de texte. */
-.hero-visual::before {
-  content: "";
-  position: absolute;
-  inset: -12%;
-  background: radial-gradient(circle, rgba(217, 138, 61, 0.4) 0%, rgba(217, 138, 61, 0) 68%);
-  filter: blur(30px);
-  z-index: -1;
 }
 
 .hero-visual-img {
   width: 100%;
   height: 100%;
+  min-height: 100%;
   object-fit: cover;
   will-change: transform;
   /* Présente la photo de façon affirmée, tout en restant lisible. */
   filter: saturate(0.85) brightness(1.04) contrast(1);
 }
 
+/* Lueur chaude : déborde légèrement sur la zone de texte pour
+   réchauffer toute la composition, sans jamais gêner la lecture
+   (faible opacité, purement décorative, derrière le texte). */
+.hero-visual::before {
+  content: "";
+  position: absolute;
+  inset: -10% -10% -10% -25%;
+  background: radial-gradient(circle, rgba(217, 138, 61, 0.35) 0%, rgba(217, 138, 61, 0) 65%);
+  filter: blur(50px);
+  z-index: -1;
+  pointer-events: none;
+}
+
 .hero-visual-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    165deg,
-    rgba(250, 244, 232, 0.05) 0%,
-    rgba(31, 59, 77, 0.22) 100%
+    100deg,
+    rgba(250, 244, 232, 0.55) 0%,
+    rgba(250, 244, 232, 0.08) 18%,
+    rgba(31, 59, 77, 0.18) 100%
   );
 }
 
@@ -1060,21 +1094,23 @@ h1, h2, h3 {
 
   /* Hero : texte d'abord, photo réduite et atténuée sous le texte */
   .hero {
-    padding: 48px 0 0;
+    min-height: auto;
+    display: block;
+    padding: 0;
   }
   .hero-inner {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 0;
   }
   .hero-content {
     order: 1;
     max-width: none;
+    padding: 48px 24px 32px;
   }
   .hero-visual {
     order: 2;
     aspect-ratio: 16 / 10;
-    border-radius: 20px;
-    margin-bottom: 8px;
+    margin: 0 0 8px;
   }
   .hero-visual::before {
     inset: -6%;
