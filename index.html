@@ -45,15 +45,6 @@
   <main id="main">
     <!-- 1. HERO -->
     <section id="accueil" class="hero">
-      <div class="hero-bg" aria-hidden="true">
-        <picture>
-          <source srcset="assets/images/volcan-02.webp" type="image/webp" />
-          <img id="heroVolcanoImg" class="hero-bg-img" src="assets/images/volcan-02.jpg" alt="" width="760" height="760" />
-        </picture>
-        <div class="hero-bg-fade"></div>
-        <div class="hero-bg-overlay"></div>
-      </div>
-
       <div class="container hero-inner">
         <div class="hero-content reveal">
           <p class="eyebrow">La Réunion · Direction & création</p>
@@ -66,6 +57,14 @@
             <a href="#contact" class="btn btn-secondary">Me contacter</a>
             <a id="heroPhotoLink" href="#" target="_blank" rel="noopener" class="btn btn-ghost">Portfolio photo ↗</a>
           </div>
+        </div>
+
+        <div class="hero-visual reveal" aria-hidden="true">
+          <picture>
+            <source srcset="assets/images/volcan-02.webp" type="image/webp" />
+            <img id="heroVolcanoImg" class="hero-visual-img" src="assets/images/volcan-02.jpg" alt="" width="760" height="760" />
+          </picture>
+          <div class="hero-visual-overlay"></div>
         </div>
       </div>
     </section>
@@ -83,29 +82,9 @@
     <section id="profil" class="section section-hybrid">
       <div class="hybrid-bg" id="hybridBg" aria-hidden="true"></div>
       <div class="container hybrid-inner">
-        <div class="hybrid-col">
-          <p class="eyebrow reveal" id="hybridEyebrow"></p>
-          <h2 class="section-title reveal" id="hybridTitle"></h2>
-          <div class="hybrid-text" id="hybridText"></div>
-        </div>
-        <figure class="hybrid-visual reveal">
-          <picture>
-            <source
-              media="(max-width: 720px)"
-              srcset="assets/images/respiration-mobile.webp"
-              type="image/webp"
-            />
-            <source srcset="assets/images/respiration-desktop.webp" type="image/webp" />
-            <source media="(max-width: 720px)" srcset="assets/images/respiration-mobile.jpg" />
-            <img
-              src="assets/images/respiration-desktop.jpg"
-              alt="Littoral volcanique et agaves à La Réunion, vagues sur les roches de lave"
-              width="760"
-              height="950"
-              loading="lazy"
-            />
-          </picture>
-        </figure>
+        <p class="eyebrow reveal" id="hybridEyebrow"></p>
+        <h2 class="section-title reveal" id="hybridTitle"></h2>
+        <div class="hybrid-text" id="hybridText"></div>
       </div>
     </section>
 
@@ -129,32 +108,11 @@
         <p class="eyebrow reveal" id="aiEyebrow"></p>
         <h2 class="section-title reveal" id="aiTitle"></h2>
         <p class="section-lead reveal" id="aiSubtitle"></p>
-        <div class="ai-steps" id="aiSteps">
-          <div class="ai-steps-line" aria-hidden="true"><span class="ai-steps-progress" id="aiStepsProgress"></span></div>
+        <div class="ai-axes" id="aiAxes">
+          <div class="ai-axes-line" aria-hidden="true"><span class="ai-axes-progress" id="aiAxesProgress"></span></div>
         </div>
-        <p class="ai-examples reveal" id="aiExamples"></p>
 
-        <div class="creative-wrap reveal">
-          <div class="creative-block" id="creativeBlock"></div>
-          <figure class="creative-visual">
-            <picture>
-              <source
-                media="(max-width: 720px)"
-                srcset="assets/images/creation-mobile.webp"
-                type="image/webp"
-              />
-              <source srcset="assets/images/creation-desktop.webp" type="image/webp" />
-              <source media="(max-width: 720px)" srcset="assets/images/creation-mobile.jpg" />
-              <img
-                src="assets/images/creation-desktop.jpg"
-                alt="Photographie de nuit en pose longue : traînées lumineuses sur une route côtière à La Réunion"
-                width="900"
-                height="563"
-                loading="lazy"
-              />
-            </picture>
-          </figure>
-        </div>
+        <div class="creative-block reveal" id="creativeBlock"></div>
       </div>
     </section>
 
@@ -162,24 +120,6 @@
     <section id="final" class="section section-final">
       <div class="container final-grid">
         <div class="final-block reveal">
-          <figure class="engagement-visual">
-            <picture>
-              <source
-                media="(max-width: 720px)"
-                srcset="assets/images/engagement-mobile.webp"
-                type="image/webp"
-              />
-              <source srcset="assets/images/engagement-desktop.webp" type="image/webp" />
-              <source media="(max-width: 720px)" srcset="assets/images/engagement-mobile.jpg" />
-              <img
-                src="assets/images/engagement-desktop.jpg"
-                alt="Moto de course préparée sur un stand, univers moto et mécanique"
-                width="1100"
-                height="353"
-                loading="lazy"
-              />
-            </picture>
-          </figure>
           <p class="eyebrow">Engagement local</p>
           <h2 class="subsection-title-lg">Engagements</h2>
           <p class="final-lead" id="engagementsIntro"></p>

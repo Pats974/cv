@@ -125,25 +125,36 @@ const SITE_DATA = {
     highlights: ["Direction pédagogique", "Coordination", "IA générative"],
   },
 
-  // Section fusionnée "IA & création" : méthode + exemples + bloc créatif.
+  // Section fusionnée "IA & création" : 3 axes (pas une méthode à 4 étapes
+  // ni une liste de petites cartes). Présente l'IA comme un différenciateur
+  // professionnel, sans en faire le centre unique du profil, et sans se
+  // présenter comme ingénieur IA : utilisateur avancé et responsable.
   aiCreation: {
-    eyebrow: "Méthode",
-    title: "IA, image et méthode de travail",
-    subtitle: "J'utilise l'IA pour clarifier, structurer, produire et améliorer.",
-    steps: [
-      { step: "01", title: "Clarifier", text: "Je formule l'objectif et le contexte avant de solliciter l'IA." },
-      { step: "02", title: "Structurer", text: "Plan, arguments, données à mobiliser : je structure l'information." },
-      { step: "03", title: "Produire", text: "Un premier jet rédactionnel ou visuel, rapidement exploitable." },
-      { step: "04", title: "Améliorer", text: "Relecture, correction, ajustement du ton et de la rigueur." },
-    ],
-    examples: [
-      "Synthétiser un dossier",
-      "Préparer une réponse à appel à projets",
-      "Structurer un support pédagogique",
-      "Reformuler une note professionnelle",
-      "Créer une trame de suivi",
-      "Automatiser une tâche répétitive",
-      "Générer ou améliorer un visuel",
+    eyebrow: "Différenciant",
+    title: "IA générative : méthode, production et esprit critique",
+    subtitle: "J'utilise l'IA comme un outil de structuration, de production et d'aide à la décision, avec une attention particulière portée à la qualité des résultats, aux biais et aux limites des outils.",
+    axes: [
+      {
+        id: "produire",
+        number: "01",
+        title: "Produire",
+        text: "Rédaction professionnelle, synthèse de documents et supports pédagogiques, prêts à être relus.",
+        items: ["Notes & trames de suivi", "Contenus visuels"],
+      },
+      {
+        id: "structurer",
+        number: "02",
+        title: "Structurer",
+        text: "Prompts avancés, organisation des idées et réponses aux appels à projets.",
+        items: ["Scénarios pédagogiques", "Appui à la gestion de projet"],
+      },
+      {
+        id: "securiser",
+        number: "03",
+        title: "Sécuriser",
+        text: "Vérification des résultats, recul critique et attention portée à la confidentialité des données.",
+        items: ["Biais & limites des outils", "Bon usage selon le contexte"],
+      },
     ],
     creative: {
       title: "Création visuelle & photographie",

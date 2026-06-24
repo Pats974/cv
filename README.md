@@ -17,8 +17,9 @@ Site **100 % statique**, sans framework ni étape de build :
 - `js/main.js` — rendu dynamique du contenu à partir de `data.js`, navigation
   mobile, lien actif au scroll, animations d'apparition, parallax léger sur
   la photo du hero, progression de la chaîne IA générative au scroll.
-- `assets/images/` — 4 photos seulement, chacune avec un rôle précis (voir
-  « Images » ci-dessous) ; chacune existe en JPG + WebP, desktop + mobile.
+- `assets/images/volcan-02.*` — **unique photo du site** (JPG + WebP),
+  signature visuelle du hero. Le site reste un CV/portfolio carrière, pas
+  une galerie photo.
 - `assets/` — favicon et dossier prévu pour le CV PDF.
 
 Aucune dépendance externe (pas de `node_modules`, pas de CDN) : le site
@@ -69,18 +70,40 @@ particulière :
 
 ## Structure du site (6 sections, nav à 5 entrées)
 
-1. **Hero** (`#accueil`) — nom, titre, accroche, ligne secondaire, photo volcan.
+1. **Hero** (`#accueil`) — nom, titre, accroche, ligne secondaire, photo
+   volcan. Grille 2 colonnes stricte (texte / visuel) : le texte ne peut
+   jamais chevaucher la photo, voir « Hero : grille anti-chevauchement ».
 2. **Ce que j'apporte** (`#apporte`) — 4 grands blocs (Piloter, Former,
    Structurer, Créer avec l'IA). Le 4e a un traitement couleur pleine pour
    casser la répétition.
 3. **Profil hybride** (`#profil`) — 2 paragraphes courts + grands mots en
    fond (décoratifs).
 4. **Parcours** (`#parcours`) — panneau sticky + timeline condensée.
-5. **IA & création** (`#ia-creation`) — méthode en 4 étapes avec ligne de
-   progression au scroll, exemples concrets, bloc création visuelle +
-   lien portfolio photo.
+5. **IA & création** (`#ia-creation`) — 3 axes (Produire, Structurer,
+   Sécuriser) avec ligne de progression colorée au scroll, + bloc
+   "Création visuelle & photographie" avec lien portfolio photo.
 6. **Section finale** (`#final`, ancre `#contact` sur le bloc contact) —
-   3 blocs compacts : Engagements, Formations & certifications, Contact.
+   3 blocs compacts : Engagements, Formations & certifications, Contact
+   (aplat bleu nuit).
+
+## Hero : grille anti-chevauchement
+
+Le hero utilise une vraie grille CSS à 2 colonnes (`.hero-inner { display:
+grid; grid-template-columns: minmax(0,1.15fr) minmax(0,0.85fr); }`) avec
+le texte dans la première colonne et la photo dans la seconde. Chaque
+colonne a sa propre largeur garantie par la grille : le texte ne peut
+jamais s'étendre dans la zone de la photo, à aucune largeur d'écran.
+
+L'ancienne version positionnait la photo en `position: absolute` à
+`left: 46%` du **viewport**, alors que le texte était limité par
+`max-width` à l'intérieur du `.container` **centré** — deux repères
+différents, qui pouvaient se chevaucher selon la largeur d'écran. Si tu
+retouches le hero, garde le texte et le visuel comme deux enfants directs
+de `.hero-inner` (jamais de positionnement absolu en `%` de viewport pour
+l'un des deux).
+
+Sur mobile (`≤ 860px`), `.hero-inner` repasse en une colonne : le texte
+passe en premier (`order: 1`), la photo réduite en second (`order: 2`).
 
 ## Modifier le contenu
 
@@ -90,14 +113,16 @@ Tout le contenu modifiable se trouve dans [`js/data.js`](js/data.js) :
   CV téléchargeable.
 - `hero` — nom, titre, accroche, ligne secondaire, photo volcan.
 - `territories` — les 4 blocs de "Ce que j'apporte" (titre, phrase, 3
-  mots-clés maximum). `accent: true` sur un bloc lui donne le traitement
-  couleur pleine.
+  mots-clés maximum).
 - `hybridProfile` — la section "Profil hybride" (2 paragraphes max + mots
   de fond décoratifs).
 - `experiences` / `experienceSummary` — parcours condensé et résumé affiché
   dans le panneau sticky à gauche sur desktop.
-- `aiCreation` — méthode IA en 4 étapes, exemples concrets, et bloc
+- `aiCreation` — les 3 axes (Produire, Structurer, Sécuriser) et le bloc
   "Création visuelle & photographie" avec lien vers le portfolio photo.
+  Présente l'IA comme différenciateur professionnel (prompting, esprit
+  critique, biais, confidentialité), pas comme le cœur du profil — garde
+  ce ton si tu modifies les textes.
 - `engagements` — intro courte + 2 engagements associatifs (sans badges).
 - `tools` — bloc compact affiché dans le pied de page (pas de section
   dédiée, pas de mur de badges).
@@ -147,9 +172,10 @@ propre couleur dans cette palette (pas de couleur ajoutée hors système).
 
 - Apparitions douces des sections au scroll (`IntersectionObserver`).
 - Parallax très lent sur la photo du hero (translation verticale légère,
-  proportionnelle au scroll).
-- Ligne de progression + activation séquentielle des 4 étapes de la section
-  IA & création au scroll.
+  proportionnelle au scroll), contenue dans sa colonne (`.hero-visual`,
+  `overflow: hidden`) — ne déborde jamais sur le texte.
+- Ligne de progression colorée + activation séquentielle des 3 axes de la
+  section IA & création au scroll.
 - Micro-interactions au survol (territoires, boutons, liens).
 - Tout est CSS/SVG/JS natif, aucune librairie d'animation ajoutée.
 - `@media (prefers-reduced-motion: reduce)` (en haut de `css/style.css`)
@@ -159,31 +185,21 @@ propre couleur dans cette palette (pas de couleur ajoutée hors système).
 
 ## Images
 
-Volontairement limitées à **4 photos sur tout le site**, chacune avec un
-rôle unique — le site ne doit pas devenir un portfolio photo :
-
-| Fichier | Rôle | Section |
-| --- | --- | --- |
-| `volcan-02.*` | Signature visuelle forte | Hero |
-| `respiration-*` | Respiration visuelle, ancrage La Réunion | Profil hybride |
-| `creation-*` | Preuve concrète de la pratique photo | IA & création |
-| `engagement-*` | Univers personnel, ancrage local | Section finale |
+Volontairement limitée à **une seule photo sur tout le site**
+(`assets/images/volcan-02.jpg` / `.webp`), utilisée comme signature
+visuelle du hero. Le site reste un CV/portfolio carrière, pas une galerie
+photo — ne pas ajouter d'autres photos sans validation explicite.
 
 ## Optimisation d'image
 
-- Chaque photo existe en 4 fichiers : `-desktop.jpg`, `-desktop.webp`,
-  `-mobile.jpg`, `-mobile.webp` (sauf le volcan, déjà petit : juste
-  `.jpg` + `.webp`). Recadrées au ratio utile à leur emplacement avant
-  compression, pour ne jamais transporter plus de pixels que nécessaire.
+- Photo recadrée en carré, compressée pour le web (~75 Ko en JPEG,
+  ~31 Ko en WebP, 760×760 px).
 - WebP généré via Pillow (`python3 -m pip install Pillow`, aucun
-  `cwebp` système requis) ; chaque `<picture>` propose le WebP en
+  `cwebp` système requis) ; le `<picture>` du hero propose le WebP en
   priorité avec repli JPEG automatique selon le support du navigateur.
-- Poids total des 4 images en WebP desktop : **~208 Ko**.
-- `loading="lazy"` sur les 3 images sous la ligne de flottaison
-  (respiration, création, engagement). L'image du hero n'est pas lazy
-  (visible dès le chargement, le lazy-loading y serait contre-productif).
-- Les versions `-mobile` sont servies sous 720 px via `<source media=...>`
-  dans chaque `<picture>`.
+- Pas de `loading="lazy"` sur cette image : elle est visible dès le
+  chargement (hero, au-dessus de la ligne de flottaison), le lazy-loading
+  y serait contre-productif.
 
 ## Informations sensibles — à ne jamais exposer
 

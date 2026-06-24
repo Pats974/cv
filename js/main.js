@@ -114,36 +114,35 @@
     timeline.appendChild(li);
   });
 
-  /* ---------------- IA & création : méthode ---------------- */
+  /* ---------------- IA & création : 3 axes ---------------- */
   document.getElementById("aiEyebrow").textContent = d.aiCreation.eyebrow;
   document.getElementById("aiTitle").textContent = d.aiCreation.title;
   document.getElementById("aiSubtitle").textContent = d.aiCreation.subtitle;
 
-  var aiSteps = document.getElementById("aiSteps");
-  var aiStepEls = [];
-  d.aiCreation.steps.forEach(function (step) {
-    var item = el("div", "ai-step");
+  var aiAxes = document.getElementById("aiAxes");
+  var aiAxisEls = [];
+  d.aiCreation.axes.forEach(function (axis) {
+    var item = el("div", "ai-axis");
 
-    var number = el("span", "ai-step-number");
-    number.textContent = step.step;
+    var number = el("span", "ai-axis-number");
+    number.textContent = axis.number;
 
     var h3 = el("h3");
-    h3.textContent = step.title;
+    h3.textContent = axis.title;
 
     var p = el("p");
-    p.textContent = step.text;
+    p.textContent = axis.text;
+
+    var items = el("p", "ai-axis-items");
+    items.textContent = axis.items.join(" · ");
 
     item.appendChild(number);
     item.appendChild(h3);
     item.appendChild(p);
-    aiSteps.appendChild(item);
-    aiStepEls.push(item);
+    item.appendChild(items);
+    aiAxes.appendChild(item);
+    aiAxisEls.push(item);
   });
-
-  var aiExamples = document.getElementById("aiExamples");
-  if (aiExamples && d.aiCreation.examples) {
-    aiExamples.textContent = "Exemples concrets : " + d.aiCreation.examples.join(" · ") + ".";
-  }
 
   /* ---------------- IA & création : bloc créatif ---------------- */
   var creativeBlock = document.getElementById("creativeBlock");
@@ -344,10 +343,10 @@
   }
 
   /* ---------------- Progression de la méthode IA au scroll ---------------- */
-  (function aiStepsProgress() {
-    var wrapper = document.getElementById("aiSteps");
-    var progress = document.getElementById("aiStepsProgress");
-    if (!wrapper || !progress || aiStepEls.length === 0) return;
+  (function aiAxesProgress() {
+    var wrapper = document.getElementById("aiAxes");
+    var progress = document.getElementById("aiAxesProgress");
+    if (!wrapper || !progress || aiAxisEls.length === 0) return;
 
     var ticking = false;
 
@@ -366,9 +365,9 @@
 
       wrapper.style.setProperty("--ai-progress", pct * 100 + "%");
 
-      var activeCount = Math.round(pct * aiStepEls.length);
-      aiStepEls.forEach(function (stepEl, index) {
-        stepEl.classList.toggle("is-active", index < activeCount || pct > 0.92);
+      var activeCount = Math.round(pct * aiAxisEls.length);
+      aiAxisEls.forEach(function (axisEl, index) {
+        axisEl.classList.toggle("is-active", index < activeCount || pct > 0.92);
       });
     }
 
