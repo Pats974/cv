@@ -17,8 +17,8 @@ Site **100 % statique**, sans framework ni étape de build :
 - `js/main.js` — rendu dynamique du contenu à partir de `data.js`, navigation
   mobile, lien actif au scroll, animations d'apparition, parallax léger sur
   la photo du hero, progression de la chaîne IA générative au scroll.
-- `assets/images/volcan-02.jpg` — photo signature (coulée de lave), utilisée
-  comme grand visuel maîtrisé dans le hero (jamais en fond plein écran brut).
+- `assets/images/` — 4 photos seulement, chacune avec un rôle précis (voir
+  « Images » ci-dessous) ; chacune existe en JPG + WebP, desktop + mobile.
 - `assets/` — favicon et dossier prévu pour le CV PDF.
 
 Aucune dépendance externe (pas de `node_modules`, pas de CDN) : le site
@@ -157,18 +157,33 @@ propre couleur dans cette palette (pas de couleur ajoutée hors système).
   utilisateurs qui l'ont demandé au niveau système. Le parallax JS vérifie
   aussi `prefers-reduced-motion` et se désactive complètement si nécessaire.
 
+## Images
+
+Volontairement limitées à **4 photos sur tout le site**, chacune avec un
+rôle unique — le site ne doit pas devenir un portfolio photo :
+
+| Fichier | Rôle | Section |
+| --- | --- | --- |
+| `volcan-02.*` | Signature visuelle forte | Hero |
+| `respiration-*` | Respiration visuelle, ancrage La Réunion | Profil hybride |
+| `creation-*` | Preuve concrète de la pratique photo | IA & création |
+| `engagement-*` | Univers personnel, ancrage local | Section finale |
+
 ## Optimisation d'image
 
-- `assets/images/volcan-02.jpg` est recadrée en carré et compressée pour le
-  web (~75 Ko, 760×760 px) : suffisant pour un usage en grand visuel de hero
-  sans jamais être affichée en téléchargement pleine résolution.
-- Pas de variante WebP fournie : aucun outil de conversion (`cwebp`,
-  Squoosh...) n'était disponible dans l'environnement de développement. Pour
-  aller plus loin, génère `volcan-02.webp` et utilise une balise `<picture>`
-  avec fallback JPEG.
-- L'image du hero n'est pas en `loading="lazy"` : elle est visible dès le
-  chargement (au-dessus de la ligne de flottaison), le lazy-loading y serait
-  contre-productif.
+- Chaque photo existe en 4 fichiers : `-desktop.jpg`, `-desktop.webp`,
+  `-mobile.jpg`, `-mobile.webp` (sauf le volcan, déjà petit : juste
+  `.jpg` + `.webp`). Recadrées au ratio utile à leur emplacement avant
+  compression, pour ne jamais transporter plus de pixels que nécessaire.
+- WebP généré via Pillow (`python3 -m pip install Pillow`, aucun
+  `cwebp` système requis) ; chaque `<picture>` propose le WebP en
+  priorité avec repli JPEG automatique selon le support du navigateur.
+- Poids total des 4 images en WebP desktop : **~208 Ko**.
+- `loading="lazy"` sur les 3 images sous la ligne de flottaison
+  (respiration, création, engagement). L'image du hero n'est pas lazy
+  (visible dès le chargement, le lazy-loading y serait contre-productif).
+- Les versions `-mobile` sont servies sous 720 px via `<source media=...>`
+  dans chaque `<picture>`.
 
 ## Informations sensibles — à ne jamais exposer
 
