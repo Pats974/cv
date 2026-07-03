@@ -145,13 +145,16 @@ Pour l'activer un jour si nécessaire :
 
 ### Remplacer la photo volcan
 
-1. Dépose la nouvelle image dans `assets/images/`.
-2. Mets à jour `hero.volcanoImage` dans `js/data.js`.
+1. Dépose la nouvelle image (JPG + WebP) dans `assets/images/`.
+2. Mets à jour `hero.volcanoImage` **et** `hero.volcanoImageWebp` dans
+   `js/data.js` (le `<source>` WebP a priorité sur le JPG dans le
+   `<picture>`, les deux doivent pointer vers la nouvelle photo).
 3. Réoptimise-la (voir « Optimisation d'image » ci-dessous) : ne jamais
    committer un fichier brut de plusieurs Mo. Le filtre CSS
-   (`filter: saturate(...) brightness(...) contrast(...)` sur `.hero-bg-img`
-   dans `css/style.css`) est calibré pour calmer une photo de lave intense ;
-   réajuste-le si la nouvelle image est déjà claire ou peu saturée.
+   (`filter: saturate(...) brightness(...) contrast(...)` sur
+   `.hero-visual-img` dans `css/style.css`) est calibré pour calmer une
+   photo de lave intense ; réajuste-le si la nouvelle image est déjà
+   claire ou peu saturée.
 
 ## Palette
 

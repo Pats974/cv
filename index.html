@@ -7,17 +7,47 @@
   <meta name="description" content="Patrice FONTAINE — Directeur adjoint, directeur pédagogique. Pilotage de projets, ingénierie de formation, IA générative et création visuelle, ancré à La Réunion." />
   <meta name="author" content="Patrice FONTAINE" />
   <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#fafaf8" />
+  <link rel="canonical" href="https://cv-patricefontaine.netlify.app/" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://cv-patricefontaine.netlify.app/" />
+  <meta property="og:site_name" content="Patrice FONTAINE" />
   <meta property="og:title" content="Patrice FONTAINE — Direction, IA générative & création visuelle" />
   <meta property="og:description" content="Je structure les projets, accompagne les équipes et transforme les idées en actions concrètes. Entre pilotage, formation, IA et création visuelle." />
   <meta property="og:locale" content="fr_FR" />
+  <meta name="twitter:card" content="summary" />
   <!-- Ajoute une image puis décommente la ligne ci-dessous -->
   <!-- <meta property="og:image" content="assets/og-image.png" /> -->
 
   <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
   <link rel="stylesheet" href="css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Patrice Fontaine",
+    "jobTitle": "Directeur adjoint / Directeur pédagogique",
+    "url": "https://cv-patricefontaine.netlify.app/",
+    "email": "mailto:patrice.fontaine97421@gmail.com",
+    "sameAs": ["https://patrice-photo.netlify.app/"],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Saint-Pierre",
+      "addressRegion": "La Réunion",
+      "addressCountry": "FR"
+    },
+    "knowsAbout": [
+      "Ingénierie de formation",
+      "Gestion de projet",
+      "IA générative",
+      "Qualiopi",
+      "Création visuelle"
+    ]
+  }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Aller au contenu principal</a>
@@ -61,8 +91,17 @@
 
         <div class="hero-visual reveal" aria-hidden="true">
           <picture>
-            <source srcset="assets/images/volcan-02.webp" type="image/webp" />
-            <img id="heroVolcanoImg" class="hero-visual-img" src="assets/images/volcan-02.jpg" alt="" width="760" height="760" />
+            <source id="heroVolcanoWebp" srcset="assets/images/volcan-02.webp" type="image/webp" />
+            <img
+              id="heroVolcanoImg"
+              class="hero-visual-img"
+              src="assets/images/volcan-02.jpg"
+              alt=""
+              width="760"
+              height="760"
+              fetchpriority="high"
+              decoding="async"
+            />
           </picture>
           <div class="hero-visual-overlay"></div>
         </div>
@@ -130,7 +169,7 @@
           <p class="eyebrow">Parcours académique</p>
           <h2 class="subsection-title-lg">Formations</h2>
           <ul class="clean-list clean-list--compact" id="formationsList"></ul>
-          <p class="subsection-title-sm">Certifications</p>
+          <h3 class="subsection-title-sm">Certifications</h3>
           <ul class="clean-list clean-list--compact" id="certificationsList"></ul>
         </div>
 
@@ -151,6 +190,7 @@
   <footer class="site-footer">
     <div class="container">
       <div class="footer-tools" id="footerTools"></div>
+      <p class="footer-interests" id="footerInterests"></p>
       <div class="footer-inner">
         <p>© <span id="year"></span> Patrice FONTAINE</p>
         <p id="footerCity"></p>

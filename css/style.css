@@ -13,15 +13,16 @@
   --accent: #1f3b4d;
   --accent-soft: #e9eef0;
   --lava: #c1572f;
+  /* Variante assombrie pour le petit texte : la lave brute (#c1572f) est
+     à 4.3:1 sur fond clair, sous le seuil AA de 4.5:1. Celle-ci passe
+     partout (≥5:1 sur ivoire, gris clair et sable). */
+  --lava-text: #a3461f;
   --lava-soft: rgba(193, 87, 47, 0.1);
-  --lava-line: rgba(193, 87, 47, 0.35);
   --amber: #d98a3d;
   --green: #2f4d3a;
   --green-soft: rgba(47, 77, 58, 0.1);
   --copper: #9c5b2e;
   --copper-soft: rgba(156, 91, 46, 0.1);
-  --radius: 14px;
-  --shadow: 0 1px 2px rgba(20, 20, 18, 0.04), 0 8px 24px rgba(20, 20, 18, 0.05);
   --max-width: 1160px;
 
   --font-sans: -apple-system, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue",
@@ -36,6 +37,10 @@
 
 html {
   scroll-behavior: smooth;
+  /* "clip" (et non "hidden") : bloque le débordement horizontal du menu
+     mobile hors-écran SANS créer de conteneur de scroll — "hidden" ici
+     casse position:sticky (header et panneau Parcours). */
+  overflow-x: clip;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -48,13 +53,9 @@ html {
   }
 }
 
-html {
-  overflow-x: hidden;
-}
-
 body {
   margin: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
   font-family: var(--font-sans);
   color: var(--text);
   background: var(--bg);
@@ -263,8 +264,26 @@ h1, h2, h3 {
 .hero {
   position: relative;
   min-height: 88vh;
+  min-height: 88svh;
   display: flex;
   overflow: hidden;
+}
+
+/* Lueur chaude à la jonction texte/photo : posée sur .hero (sous
+   .hero-inner qui est en z-index 2) pour être réellement visible —
+   à l'intérieur de .hero-visual elle serait clippée par overflow:hidden
+   et masquée par la photo opaque. */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 12%;
+  left: 34%;
+  width: 36%;
+  height: 72%;
+  background: radial-gradient(circle, rgba(217, 138, 61, 0.3) 0%, rgba(217, 138, 61, 0) 68%);
+  filter: blur(48px);
+  z-index: 1;
+  pointer-events: none;
 }
 
 /* Grille pleine largeur (pas de .container) : la photo va jusqu'au bord
@@ -310,7 +329,7 @@ h1, h2, h3 {
   text-transform: uppercase;
   letter-spacing: 0.14em;
   font-size: 0.78rem;
-  color: var(--lava);
+  color: var(--lava-text);
   font-weight: 700;
   margin: 0 0 18px;
 }
@@ -337,7 +356,7 @@ h1, h2, h3 {
 
 .hero-secondary {
   font-size: 0.98rem;
-  color: var(--lava);
+  color: var(--lava-text);
   font-weight: 600;
   margin: 0 0 36px;
 }
@@ -367,19 +386,6 @@ h1, h2, h3 {
   will-change: transform;
   /* Présente la photo de façon affirmée, tout en restant lisible. */
   filter: saturate(0.85) brightness(1.04) contrast(1);
-}
-
-/* Lueur chaude : déborde légèrement sur la zone de texte pour
-   réchauffer toute la composition, sans jamais gêner la lecture
-   (faible opacité, purement décorative, derrière le texte). */
-.hero-visual::before {
-  content: "";
-  position: absolute;
-  inset: -10% -10% -10% -25%;
-  background: radial-gradient(circle, rgba(217, 138, 61, 0.35) 0%, rgba(217, 138, 61, 0) 65%);
-  filter: blur(50px);
-  z-index: -1;
-  pointer-events: none;
 }
 
 .hero-visual-overlay {
@@ -420,11 +426,6 @@ h1, h2, h3 {
   margin: -16px 0 36px;
 }
 
-.subsection-title {
-  font-size: 1.05rem;
-  margin: 28px 0 16px;
-  color: var(--accent);
-}
 
 /* =========================================================
    Profil hybride — section courte, mots de fond
@@ -549,7 +550,9 @@ h1, h2, h3 {
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.07em;
-  color: var(--t-color, var(--lava));
+  /* --t-text : variante assombrie quand la couleur d'identité du bloc
+     ne passe pas le contraste AA en petit texte sur son fond teinté. */
+  color: var(--t-text, var(--t-color, var(--lava-text)));
   font-weight: 700;
   margin: 0;
 }
@@ -568,15 +571,18 @@ h1, h2, h3 {
 }
 .territory--structurer {
   --t-color: var(--copper);
+  --t-text: #87491f;
   --t-soft: var(--copper-soft);
   --t-soft-hover: rgba(156, 91, 46, 0.16);
 }
 
 /* Le 4e territoire ("Créer avec l'IA") casse la répétition avec une
-   couleur pleine lave/ambre, pour faire ressortir l'IA comme différenciant. */
+   couleur pleine lave/cuivre, pour faire ressortir l'IA comme
+   différenciant. Cuivre (et non ambre) en fin de dégradé : le blanc
+   n'atteint que 2.7:1 sur l'ambre, contre 5.3:1 sur le cuivre. */
 .territory--creer {
   border-left-color: var(--lava);
-  background: linear-gradient(115deg, var(--lava) 0%, var(--amber) 100%) !important;
+  background: linear-gradient(115deg, var(--lava) 0%, var(--copper) 100%) !important;
   color: #fff;
 }
 .territory--creer .territory-number {
@@ -584,7 +590,7 @@ h1, h2, h3 {
   opacity: 0.3;
 }
 .territory--creer:hover {
-  background: linear-gradient(115deg, #a3461f 0%, var(--lava) 100%) !important;
+  background: linear-gradient(115deg, #a3461f 0%, #87491f 100%) !important;
 }
 .territory--creer:hover .territory-number {
   opacity: 0.5;
@@ -594,7 +600,7 @@ h1, h2, h3 {
   color: #fff;
 }
 .territory--creer .territory-keywords {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.95);
 }
 
 /* =========================================================
@@ -673,7 +679,7 @@ h1, h2, h3 {
   font-size: 0.82rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--lava);
+  color: var(--lava-text);
   font-weight: 700;
 }
 
@@ -692,7 +698,7 @@ h1, h2, h3 {
   margin: 0 0 14px;
 }
 .timeline-item.is-current .timeline-org {
-  color: var(--lava);
+  color: var(--lava-text);
 }
 
 .timeline-item ul {
@@ -776,7 +782,10 @@ h1, h2, h3 {
 }
 
 .ai-axis {
+  /* --s-color pilote les éléments graphiques (points, ligne),
+     --s-text la couleur de texte (assombrie si besoin pour AA). */
   --s-color: var(--lava);
+  --s-text: var(--lava-text);
   position: relative;
   padding-top: 24px;
   opacity: 0.5;
@@ -785,12 +794,15 @@ h1, h2, h3 {
 }
 .ai-axis:nth-child(1) {
   --s-color: var(--lava);
+  --s-text: var(--lava-text);
 }
 .ai-axis:nth-child(2) {
   --s-color: var(--copper);
+  --s-text: #87491f;
 }
 .ai-axis:nth-child(3) {
   --s-color: var(--accent);
+  --s-text: var(--accent);
 }
 .ai-axis.is-active {
   opacity: 1;
@@ -817,7 +829,7 @@ h1, h2, h3 {
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.08em;
-  color: var(--s-color);
+  color: var(--s-text);
 }
 
 .ai-axis h3 {
@@ -833,7 +845,7 @@ h1, h2, h3 {
 
 .ai-axis-items {
   font-size: 0.82rem;
-  color: var(--s-color);
+  color: var(--s-text);
   font-weight: 700;
   margin: 0;
 }
@@ -912,7 +924,7 @@ h1, h2, h3 {
   margin: 0 0 2px;
 }
 .engagement-item .card-role {
-  color: var(--lava);
+  color: var(--lava-text);
   font-weight: 600;
   font-size: 0.84rem;
   margin: 0 0 8px;
@@ -926,12 +938,6 @@ h1, h2, h3 {
 /* =========================================================
    Formations / certifications
    ========================================================= */
-.two-col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-}
-
 .clean-list li {
   padding: 14px 0;
   border-bottom: 1px solid var(--border);
@@ -970,7 +976,9 @@ h1, h2, h3 {
   border-radius: 22px;
 }
 .final-block--dark .eyebrow {
-  color: var(--amber);
+  /* Ambre éclairci : l'ambre standard n'est qu'à 4.27:1 sur le bleu
+     nuit, celui-ci monte à 5.85:1. */
+  color: #f0a862;
 }
 .final-block--dark .subsection-title-lg {
   color: #fff;
@@ -1027,6 +1035,18 @@ h1, h2, h3 {
   font-size: 0.8rem;
 }
 .footer-tools strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.footer-interests {
+  margin: 0 0 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+.footer-interests strong {
   color: var(--text);
   font-weight: 700;
 }
@@ -1098,6 +1118,11 @@ h1, h2, h3 {
     display: block;
     padding: 0;
   }
+  /* Colonnes empilées : la lueur de jonction n'a plus de sens ici et
+     teinterait le texte. */
+  .hero::before {
+    display: none;
+  }
   .hero-inner {
     grid-template-columns: 1fr;
     gap: 0;
@@ -1111,9 +1136,6 @@ h1, h2, h3 {
     order: 2;
     aspect-ratio: 16 / 10;
     margin: 0 0 8px;
-  }
-  .hero-visual::before {
-    inset: -6%;
   }
   .hero-visual-overlay {
     background: linear-gradient(
@@ -1165,11 +1187,6 @@ h1, h2, h3 {
   .ai-axis::before {
     top: 2px;
     left: -5px;
-  }
-
-  .two-col {
-    grid-template-columns: 1fr;
-    gap: 32px;
   }
 
   .final-grid {

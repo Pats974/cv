@@ -30,6 +30,7 @@ const SITE_DATA = {
     secondaryLine: "Entre pilotage, formation, IA et création visuelle.",
     // Photo signature : coulée de lave (énergie, ancrage local, force tranquille).
     volcanoImage: "assets/images/volcan-02.jpg",
+    volcanoImageWebp: "assets/images/volcan-02.webp",
   },
 
   // "Ce que j'apporte" — 4 grands blocs, pas une liste de compétences.

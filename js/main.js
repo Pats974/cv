@@ -17,9 +17,15 @@
   document.getElementById("heroTagline").textContent = d.hero.tagline;
   document.getElementById("heroSecondary").textContent = d.hero.secondaryLine;
   document.getElementById("heroPhotoLink").href = d.contact.photoPortfolio;
+
+  // Image décorative (conteneur aria-hidden, alt vide) : on synchronise
+  // les deux formats depuis data.js — le <source> WebP a priorité sur le
+  // src de l'<img> dans un <picture>, il doit donc être mis à jour aussi.
   var heroVolcanoImg = document.getElementById("heroVolcanoImg");
   heroVolcanoImg.src = d.hero.volcanoImage;
-  heroVolcanoImg.alt = "Coulée de lave volcanique à La Réunion, en arrière-plan atténué";
+  if (d.hero.volcanoImageWebp) {
+    document.getElementById("heroVolcanoWebp").srcset = d.hero.volcanoImageWebp;
+  }
 
   /* ---------------- Territoires : "Ce que j'apporte" ---------------- */
   var territoryList = document.getElementById("territoryList");
@@ -256,6 +262,14 @@
     span.appendChild(document.createTextNode(tool.items));
     footerTools.appendChild(span);
   });
+
+  var footerInterests = document.getElementById("footerInterests");
+  if (footerInterests && d.interests && d.interests.length) {
+    var interestsStrong = el("strong");
+    interestsStrong.textContent = "Centres d'intérêt : ";
+    footerInterests.appendChild(interestsStrong);
+    footerInterests.appendChild(document.createTextNode(d.interests.join(" · ")));
+  }
 
   /* ---------------- Mobile nav ---------------- */
   var navToggle = document.getElementById("navToggle");
