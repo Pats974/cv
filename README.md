@@ -156,6 +156,19 @@ Pour l'activer un jour si nécessaire :
    photo de lave intense ; réajuste-le si la nouvelle image est déjà
    claire ou peu saturée.
 
+## Typographie
+
+- **Titres** : Fraunces (serif éditoriale), auto-hébergée dans
+  `assets/fonts/` (~60 Ko au total, deux fichiers woff2 : la version
+  normale est une police variable couvrant les graisses 600–700, plus
+  une italique 600 pour les grands chiffres et mots décoratifs).
+  Aucune requête vers un CDN au chargement ; repli sur Georgia/serif
+  si la police ne charge pas (`font-display: swap`).
+- **Texte courant** : pile système (`--font-sans`), pour la performance
+  et la lisibilité.
+- Le fichier principal est préchargé dans `index.html`
+  (`<link rel="preload">`) pour éviter le flash de police sur le titre.
+
 ## Palette
 
 Définie en haut de [`css/style.css`](css/style.css) (custom properties) :
